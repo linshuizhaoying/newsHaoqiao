@@ -3,7 +3,7 @@ import * as Cors from 'koa-cors'
 import * as Logger from 'koa-logger'
 import * as bodyParser from 'koa-bodyparser'
 
-import Route from './routes'
+import { Router } from './routes'
 
 import { config } from './config'
 const app = new Koa()
@@ -27,7 +27,7 @@ mongoose.connect(config.mongo.url, { useMongoClient: true })
 
 app.use(bodyParser())
 
-Route(app)
+Router(app)
 
 const port = config.app.port
 console.log('服务正在监听端口:' + port)

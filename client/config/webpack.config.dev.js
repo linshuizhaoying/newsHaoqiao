@@ -12,7 +12,7 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader')
-
+const tsImportPluginFactory = require('ts-import-plugin')
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 const publicPath = '/';
@@ -116,10 +116,31 @@ module.exports = {
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {
-        test: /\.(ts|tsx)$/,
-        loader: require.resolve('tslint-loader'),
-        enforce: 'pre',
-        include: paths.appSrc,
+        // test: /\.(ts|tsx)$/,
+        // loader: require.resolve('tslint-loader'),
+        // enforce: 'pre',
+        // include: paths.appSrc,
+        // options: {
+        //   plugins: [
+        //     ['import', { libraryName: 'antd', style: true }]
+        //   ]
+        // }
+        test: /\.(jsx|tsx|js|ts)$/,
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+          getCustomTransformers: () => ({
+            before: [ tsImportPluginFactory( {
+              libraryName: 'antd',
+              libraryDirectory: 'lib',
+              style: true
+            }) ]
+          }),
+          compilerOptions: {
+            module: 'es2015'
+          }
+        },
+        exclude: /node_modules/
       },
       {
         test: /\.js$/,
@@ -194,11 +215,11 @@ module.exports = {
           require.resolve('style-loader'),
           {
             loader: require.resolve('css-loader'),
-            options: {
-              importLoaders: 1,
-              modules: true,
-              localIdentName: '[hash:base64:8]'
-            },
+            // options: {
+            //   importLoaders: 1,
+            //   modules: true,
+            //   localIdentName: '[hash:base64:8]'
+            // },
           },
           {
             loader: require.resolve('postcss-loader'),

@@ -8,9 +8,9 @@ export interface UserAction {
 
 // 定义用户的信息
 export interface UserInfo {
-  userid: '',
-  username: '',
-  type: '', // normal || admin
+  userId: '',
+  userName: '',
+  type: '', // 0 管理员 || 1 普通用户
 }
 
 // 定义用户的状态

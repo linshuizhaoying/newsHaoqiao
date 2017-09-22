@@ -4,7 +4,7 @@ import * as React from 'react'
 // import {
 //   RegInRemote
 // } from '../../../actions'
-import styles from './index.less'
+import './index.less'
 
 interface IProps {
   isLogin: string,
@@ -19,7 +19,7 @@ interface IProps {
 export class Home extends React.Component<IProps, {}> {
   render () {
     return(
-      <button className={styles.home}> Home</button>
+      <button className="home"> Home</button>
     )
   }
 }

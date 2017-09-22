@@ -8,8 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const jwt = require("jsonwebtoken");
 const validator_1 = require("../utils/validator");
 const controllers_1 = require("../db/controllers");
+const config_1 = require("../config");
 const Msg = {
     0: '数据库出错!',
     2: '用户数据不正常',
@@ -74,7 +76,12 @@ exports.reg = (ctx) => __awaiter(this, void 0, void 0, function* () {
         }
         else {
             const { userName, userId } = result;
-            return ctx.body = success({ userName, userId });
+            const token = jwt.sign({
+                userId: userId,
+                userName: userName,
+                exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60 // 1 hours
+            }, config_1.config.app.keys);
+            return ctx.body = success({ userName, userId, token });
         }
     }
     else {
@@ -103,5 +110,8 @@ exports.reg = (ctx) => __awaiter(this, void 0, void 0, function* () {
  *  }
  */
 exports.login = (ctx) => __awaiter(this, void 0, void 0, function* () {
+});
+exports.userInfo = (ctx) => __awaiter(this, void 0, void 0, function* () {
+    return ctx.body = { userInfo: 'success' };
 });
 //# sourceMappingURL=userApi.js.map

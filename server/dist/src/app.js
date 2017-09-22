@@ -22,7 +22,7 @@ console.log('start');
 const mongoose = require('mongoose');
 mongoose.connect(config_1.config.mongo.url, { useMongoClient: true });
 app.use(bodyParser());
-routes_1.default(app);
+routes_1.Router(app);
 const port = config_1.config.app.port;
 console.log('服务正在监听端口:' + port);
 app.listen(port, () => {

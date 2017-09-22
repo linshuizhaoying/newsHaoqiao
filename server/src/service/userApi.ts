@@ -1,9 +1,11 @@
+import * as jwt from 'jsonwebtoken'
 import Validator from '../utils/validator'
 import { AddRegUser } from '../db/controllers'
-
+import { config } from '../config'
 interface UserData  {
   userId: string,
-  userName: string
+  userName: string,
+  token: string
 }
 
 interface ErrorData  {
@@ -88,7 +90,12 @@ export const reg = async(ctx: any) => {
       })
     } else {
       const { userName, userId } = result
-      return ctx.body = success({ userName, userId })
+      const token = jwt.sign({
+        userId: userId,
+        userName: userName,
+        exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60 // 1 hours
+      }, config.app.keys)
+      return ctx.body = success({ userName, userId, token })
     }
   } else {
     // 用户提交数据异常
@@ -119,4 +126,8 @@ export const reg = async(ctx: any) => {
  */
 export const login = async(ctx: any) => {
 
+}
+
+export const userInfo = async(ctx: any) => {
+  return ctx.body = { userInfo: 'success' }
 }

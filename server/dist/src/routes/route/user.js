@@ -8,21 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Irouter = require("koa-router");
-const token_1 = require("../middleware/token");
-const Service = require("../service");
-const config_1 = require("../config");
-// 前缀路由 /api
-const router = new Irouter({ prefix: config_1.config.app.baseApi });
-exports.Router = (app) => {
-    // 用户 注册 登录
+const token_1 = require("../../middleware/token");
+const Service = require("../../service");
+exports.default = (router) => __awaiter(this, void 0, void 0, function* () {
+    // 注册
     const { reg, login, userInfo } = Service;
     router.post('/reg', Service.reg)
         .get('/userInfo', token_1.default, Service.userInfo);
-    router.all('/*', (ctx, next) => __awaiter(this, void 0, void 0, function* () {
-        ctx.body = '404';
-    }));
-    app.use(router.routes());
-};
-exports.default = exports.Router;
-//# sourceMappingURL=index.js.map
+});
+//# sourceMappingURL=user.js.map

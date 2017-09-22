@@ -1,25 +1,24 @@
 import { USER_REG, 
         //  USER_LOGIN, 
         //  USER_LOGOUT 
-       } from '../constants/user';
-
-import { UserState,
-         UserAction
-       } from '../models/user';
+       } from '../constants/user'
 
 const initialState = {
   isLogin: false,
-  token: null,
-  userInfo: null
+  token: '',
+  userName: '',
+  userId: ''
 }
 
-const user = (state: UserState = initialState, action: UserAction) => {
+const user = (state = initialState, action: any) => {
   switch (action.type) {
     case USER_REG:
       return {
         ...state,
         isLogin: true,
-        userInfo: action.data && action.data.data !== undefined ? action.data.data  : 'no data'
+        userName: action.data.data.data.userName,
+        token: action.data.data.data.token,
+        userId: action.data.data.data.userId,
       }
     default:
       return state

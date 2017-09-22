@@ -16,8 +16,9 @@ let instance = axios.create({
 // 截取请求或响应在被 then 或者 catch 处理之前
 instance.interceptors.response.use(
   response => {
+    console.log(response)
     if (response.status === 401) {
-      history.push('/account/login')
+      history.push('/reg')
       return Promise.reject(response.data)
     } else if (response.status >= 400) {
       return Promise.reject(response.data)

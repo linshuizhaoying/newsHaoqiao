@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Home } from '../Routes/Home'
-import Reg  from '../Routes/Reg'
+import RegWrapper from '../Routes/Reg'
 import { Switch, Route, Link } from 'react-router-dom';
-
+import './index.less';
 export class App extends React.Component<any, any> {
   componentDidMount() {
     let isLogin = false;
@@ -27,7 +27,7 @@ export class App extends React.Component<any, any> {
         <div className="App-content">
           <Switch>
             <Route path="/home" component={Home}/> 
-            <Route path="/reg" component={Reg}/> 
+            <Route path="/reg" component={RegWrapper}/> 
           </Switch>
           {/* <Reg></Reg> */}
         </div>
