@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import createBrowserHistory from 'history/createBrowserHistory'
+import NotificationUtils from '../util/notification';
 
 const history = createBrowserHistory()
 
@@ -17,8 +18,7 @@ let instance = axios.create({
 instance.interceptors.response.use(
   response => {
     console.log(response)
-    if (response.status === 401) {
-      history.push('/reg')
+    if (response.status === 401) {      
       return Promise.reject(response.data)
     } else if (response.status >= 400) {
       return Promise.reject(response.data)
@@ -26,7 +26,10 @@ instance.interceptors.response.use(
       return Promise.resolve(response.data)
     }
   },
-  error =>
+  error => {
+    NotificationUtils.notificationError('获取失败!','身份验证失败',3)
     Promise.reject(error)
+  }
+
 )
 export default instance

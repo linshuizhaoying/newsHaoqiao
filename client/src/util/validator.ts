@@ -11,10 +11,11 @@ const RULES = {
   zipcode: /^\d{6}$/,
   username: /^\w{4,12}$/,
   password: /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,12}$/,
-  required: function(value: string) { return !!(value + '').trim() }
+  required: (value: string) => { return value !== undefined && value.length !== 0 }
 }
 export class Validator {
   userCheck = (value: string) => {
+    console.log(RULES.required(value))
     if (!RULES.required(value)) {
       return false
     }else {

@@ -18,7 +18,9 @@ exports.Router = (app) => {
     // 用户 注册 登录
     const { reg, login, userInfo } = Service;
     router.post('/reg', Service.reg)
-        .get('/userInfo', token_1.default, Service.userInfo);
+        .post('/login', Service.login)
+        .get('/userInfo', token_1.default, Service.userInfo)
+        .get('/token', token_1.default, Service.token);
     router.all('/*', (ctx, next) => __awaiter(this, void 0, void 0, function* () {
         ctx.body = '404';
     }));

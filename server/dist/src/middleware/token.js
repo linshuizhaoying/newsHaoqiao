@@ -28,6 +28,8 @@ exports.default = (ctx, next) => __awaiter(this, void 0, void 0, function* () {
         ctx.throw(401, '无效的token');
     }
     console.log('鉴权成功');
+    console.log(tokenContent);
+    ctx.tokenContent = tokenContent;
     yield next();
 });
 //# sourceMappingURL=token.js.map

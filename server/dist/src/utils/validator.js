@@ -13,7 +13,7 @@ const RULES = {
     zipcode: /^\d{6}$/,
     username: /^\w{4,12}$/,
     password: /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,12}$/,
-    required: function (value) { return !!(value + '').trim(); }
+    required: function (value) { return value !== undefined && value.length !== 0; }
 };
 class Validator {
     constructor() {

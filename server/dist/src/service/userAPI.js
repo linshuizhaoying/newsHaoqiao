@@ -12,17 +12,12 @@ const jwt = require("jsonwebtoken");
 const validator_1 = require("../utils/validator");
 const controllers_1 = require("../db/controllers");
 const config_1 = require("../config");
-const Msg = {
-    0: '数据库出错!',
-    2: '用户数据不正常',
-    3: '用户名不能重复'
-};
 // 返回正常数据
 const success = (data) => {
     return {
         'state': {
             'code': 1,
-            'msg': '注册成功!'
+            'msg': data.msg
         },
         'data': {
             data
@@ -71,24 +66,24 @@ exports.reg = (ctx) => __awaiter(this, void 0, void 0, function* () {
             // 用户名重复
             return ctx.body = error({
                 code: 2,
-                msg: Msg[3]
+                msg: result.msg
             });
         }
         else {
-            const { userName, userId } = result;
+            const { userName, userId, msg } = result;
             const token = jwt.sign({
                 userId: userId,
                 userName: userName,
                 exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60 // 1 hours
             }, config_1.config.app.keys);
-            return ctx.body = success({ userName, userId, token });
+            return ctx.body = success({ userName, userId, token, msg });
         }
     }
     else {
         // 用户提交数据异常
         return ctx.body = error({
             code: 2,
-            msg: Msg[2]
+            msg: '用户数据不正常'
         });
     }
 });
@@ -110,8 +105,53 @@ exports.reg = (ctx) => __awaiter(this, void 0, void 0, function* () {
  *  }
  */
 exports.login = (ctx) => __awaiter(this, void 0, void 0, function* () {
+    const { username, password, email } = ctx.request.body;
+    // 后端先做初步的数据校验和非法字符处理
+    if (validator_1.default.userCheck(username) && validator_1.default.passCheck(password)) {
+        // 数据符合规范
+        // 查询数据库
+        let result = '';
+        result = yield controllers_1.LoginUser({ username, password });
+        console.log('登录用户状况:\n', result);
+        if (result.status === 'error') {
+            // 用户不存在 或者 用户密码错误
+            return ctx.body = error({
+                code: 2,
+                msg: result.msg
+            });
+        }
+        else {
+            const { userName, userId, msg } = result;
+            const token = jwt.sign({
+                userId: userId,
+                userName: userName,
+                exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60 // 1 hours
+            }, config_1.config.app.keys);
+            return ctx.body = success({ userName, userId, token, msg });
+        }
+    }
+    else {
+        // 用户提交数据异常
+        return ctx.body = error({
+            code: 2,
+            msg: '用户数据不正常'
+        });
+    }
 });
 exports.userInfo = (ctx) => __awaiter(this, void 0, void 0, function* () {
-    return ctx.body = { userInfo: 'success' };
+    return ctx.body = { userInfo: '{username:test110,password:nopass,email:test}' };
+});
+exports.token = (ctx) => __awaiter(this, void 0, void 0, function* () {
+    // 根据接口规范返回数据
+    return ctx.body = {
+        'state': {
+            'code': 1,
+            'msg': '登录成功'
+        },
+        'data': {
+            'userId': ctx.tokenContent.userId,
+            'userName': ctx.tokenContent.userName
+        }
+    };
 });
 //# sourceMappingURL=userApi.js.map

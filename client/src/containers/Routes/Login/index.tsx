@@ -1,5 +1,4 @@
-import { combine } from 'most/type-definitions';
-import * as React from 'react';
+import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { Form, Icon, Input, Button } from 'antd'
@@ -10,36 +9,39 @@ import NotificationUtils from '../../../util/notification';
 
 import Validator from '../../../util/validator'
 
-import { RegInRemote } from '../../../actions'
+import { LoginInRemote } from '../../../actions'
 
 import { setToken } from '../../../util/store';
 
-import './index.less';
+import './index.less'
+
 
 const FormItem = Form.Item
-class Reg extends React.Component<any, any> {
+class Login extends React.Component<any, any> {
 
   constructor (props: any) {
     super(props)
     this.state = {
       username: '',
       password: '',
-      email: ''
     }
   }
+
   componentDidMount() {
     if(this.props.isLogin){
       const { history } = this.props;
       history.push({ pathname: '/home'});
     }
   }
+
   componentWillReceiveProps(nextProps: any) {
     // console.log(nextProps)
     if(nextProps.status === 1){
-      NotificationUtils.notificationSuccess("注册成功!", nextProps.msg, 2);
+      NotificationUtils.notificationSuccess("登录成功!", nextProps.msg, 2);
       const { history } = this.props;
       // 本地缓存token
       setToken(nextProps.token)
+
       history.push({ pathname: '/home'});
     }
 
@@ -61,15 +63,6 @@ class Reg extends React.Component<any, any> {
     }
   }
 
-  checkConfirm = (rule: any, value: any, callback: any) => {
-    const form = this.props.form;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('两次输入的密码不同，请重新确认!');
-    } else {
-      callback();
-    }
-  }
-
   handleChange(e: any, value: any) {
     this.setState({
       [value]: e.target.value
@@ -77,19 +70,14 @@ class Reg extends React.Component<any, any> {
       // console.log(this.state)
     })
   }
-  regMe() {
-    const { dispatch } = this.props;
-    // console.log(RegInRemote)
-    dispatch(RegInRemote(this.state))
-  }
 
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        let {username, password, email} = values;
+        let {username, password} = values;
         const { dispatch } = this.props;
-        dispatch(RegInRemote({username, password, email}))
+        dispatch(LoginInRemote({username, password}))
       }
     });
   }
@@ -107,17 +95,7 @@ class Reg extends React.Component<any, any> {
               <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="用户名" />
             )}
           </FormItem>
-          <FormItem>
-            {getFieldDecorator('email', {
-              rules: [{
-                type: 'email', message: '邮箱格式非法!',
-              }, {
-                required: true, message: '请输入你的邮箱!',
-              }],
-            })(
-              <Input prefix={<Icon type="mail" style={{ fontSize: 13 }}/>}   placeholder="邮箱"/>
-            )}
-          </FormItem>
+         
           <FormItem>
             {getFieldDecorator('password', {
               rules: [{ required: true, message: '请输入密码!' }, {
@@ -127,26 +105,16 @@ class Reg extends React.Component<any, any> {
               <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="密码" />
             )}
           </FormItem>
+         
           <FormItem>
-            {getFieldDecorator('confirm', {
-              rules: [{
-                required: true, message: '请输入相同的密码!',
-              }, {
-                validator: this.checkConfirm,
-              }],
-            })(
-              <Input type="password" prefix={<Icon type="lock" style={{ fontSize: 13 }} />} placeholder="再次输入密码"/>
-            )}
-          </FormItem>
-          <FormItem>
-            <Button type="primary" className="signup-form-button">
-              <Link to={{
-                pathname: '/login',
-                state: {}
-              }}>去登录</Link>
+            <Button type="primary" className="signup-form-button" htmlType="submit">
+               登录
             </Button>
-            <Button type="danger" htmlType="submit" className="signup-form-button">
-              注册
+            <Button type="danger" className="signup-form-button">
+              <Link to={{
+                pathname: '/reg',
+                state: {}
+              }}>去注册</Link>
             </Button>
           </FormItem>
         </Form>
@@ -160,8 +128,9 @@ const mapStateToProps = (state: any) => ({
   userId: state.user.userId,
   status: state.user.status,
   msg: state.user.msg,
+  token: state.user.token
 })
 
-Reg = connect(mapStateToProps)(Reg);
-const RegWrapper = Form.create()(Reg)
-export default RegWrapper;
+Login = connect(mapStateToProps)(Login);
+const LoginWrapper = Form.create()(Login)
+export default LoginWrapper;

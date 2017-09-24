@@ -18,5 +18,7 @@ export default async(ctx: any, next: any) => {
     ctx.throw(401, '无效的token')
   }
   console.log('鉴权成功')
+  console.log(tokenContent)
+  ctx.tokenContent = tokenContent
   await next()
 }

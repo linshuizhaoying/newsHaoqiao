@@ -1,11 +1,12 @@
 import * as jwt from 'jsonwebtoken'
 import Validator from '../utils/validator'
-import { AddRegUser } from '../db/controllers'
+import { AddRegUser, LoginUser } from '../db/controllers'
 import { config } from '../config'
 interface UserData  {
   userId: string,
   userName: string,
-  token: string
+  token: string,
+  msg: string
 }
 
 interface ErrorData  {
@@ -22,18 +23,12 @@ interface Result {
 }
 
 
-const Msg = {
-  0 : '数据库出错!',
-  2 : '用户数据不正常',
-  3 : '用户名不能重复'
-}
-
 // 返回正常数据
 const success = ( data: UserData ) => {
   return {
     'state': {
         'code': 1,
-        'msg': '注册成功!'
+        'msg': data.msg
     },
     'data': {
        data
@@ -86,23 +81,23 @@ export const reg = async(ctx: any) => {
       return ctx.body =  error(
       {
         code: 2,
-        msg: Msg[3]
+        msg: result.msg
       })
     } else {
-      const { userName, userId } = result
+      const { userName, userId, msg } = result
       const token = jwt.sign({
         userId: userId,
         userName: userName,
         exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60 // 1 hours
       }, config.app.keys)
-      return ctx.body = success({ userName, userId, token })
+      return ctx.body = success({ userName, userId, token, msg })
     }
   } else {
     // 用户提交数据异常
   return ctx.body =  error(
     {
       code: 2,
-      msg: Msg[2]
+      msg: '用户数据不正常'
     })
   }
 }
@@ -125,9 +120,53 @@ export const reg = async(ctx: any) => {
  *  }
  */
 export const login = async(ctx: any) => {
-
+  const {username, password, email} = ctx.request.body;
+   // 后端先做初步的数据校验和非法字符处理
+   if (Validator.userCheck(username) && Validator.passCheck(password)) {
+    // 数据符合规范
+    // 查询数据库
+      let result: any = ''
+      result = await LoginUser( {username, password} )
+      console.log('登录用户状况:\n', result)
+      if (result.status === 'error') {
+        // 用户不存在 或者 用户密码错误
+        return ctx.body =  error(
+        {
+          code: 2,
+          msg: result.msg
+        })
+      } else {
+        const { userName, userId, msg } = result
+        const token = jwt.sign({
+          userId: userId,
+          userName: userName,
+          exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60 // 1 hours
+        }, config.app.keys)
+        return ctx.body = success({ userName, userId, token, msg })
+      }
+    } else {
+      // 用户提交数据异常
+    return ctx.body =  error(
+      {
+        code: 2,
+        msg: '用户数据不正常'
+      })
+    }
 }
 
 export const userInfo = async(ctx: any) => {
-  return ctx.body = { userInfo: 'success' }
+  return ctx.body = { userInfo: '{username:test110,password:nopass,email:test}' }
+}
+export const token = async(ctx: any) => {
+  // 根据接口规范返回数据
+  return ctx.body = {
+    'state': {
+          'code': 1,
+          'msg': '登录成功'
+      },
+      'data': {
+          'userId': ctx.tokenContent.userId,
+          'userName': ctx.tokenContent.userName
+      }
+  }
 }
