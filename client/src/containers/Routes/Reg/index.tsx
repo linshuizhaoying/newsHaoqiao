@@ -1,4 +1,3 @@
-import { combine } from 'most/type-definitions';
 import * as React from 'react';
 import { connect } from 'react-redux'
 
@@ -47,7 +46,7 @@ class Reg extends React.Component<any, any> {
 
   checkUsername = (rule: any, value: any, callback: any) =>{
     if(!Validator.userCheck(value)){
-      callback('用户名必须4位及以上');
+      callback('用户名长度为4-12位,只允许字母数字组合');
     }else{
       callback();
     }

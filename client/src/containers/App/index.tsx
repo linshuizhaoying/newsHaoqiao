@@ -7,11 +7,16 @@ import LoginWrapper from '../Routes/Login'
 import { Switch, Route } from 'react-router-dom';
 
 import { getToken } from '../../util/store';
-import { TokenRemote } from '../../actions'
-
+import { Logout, TokenRemote } from '../../actions'
+import Header from '../../components/Header'
 import './index.less';
 
 export class App extends React.Component<any, any> {
+  constructor (props: any) {
+    super(props)
+    this.logOut = this.logOut.bind(this)
+  }
+
   componentDidMount() {
     const { history } = this.props;
     // 只要本地缓存token那就是登录状态
@@ -20,7 +25,7 @@ export class App extends React.Component<any, any> {
       const { dispatch } = this.props;
       dispatch(TokenRemote())
       history.push('/home')
-      
+
     } else {
       console.log('未登录状态')
       console.log(getToken())
@@ -28,13 +33,15 @@ export class App extends React.Component<any, any> {
     }
   }
 
+  logOut() {
+    const { dispatch } = this.props;
+    dispatch(Logout())
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>欢迎登录:</h2>
-
-        </div>
+        <Header isLogin={this.props.isLogin} userName={this.props.userName} logOut={this.logOut}></Header>
         <div className="App-content">
           <Switch>
             <Route path="/home" component={Home}/> 
@@ -48,6 +55,7 @@ export class App extends React.Component<any, any> {
 }
 const mapStateToProps = (state: any) => ({
   isLogin: state.user.isLogin,
+  userName: state.user.userName,
 })
 
 App = connect(mapStateToProps)(App);

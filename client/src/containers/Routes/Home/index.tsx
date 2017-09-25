@@ -1,26 +1,14 @@
-import { setTimeout } from 'timers';
 import * as React from 'react';
-
-import { connect } from 'react-redux'
-
-import { UserInfoRemote, Logout } from '../../../actions'
-import { getToken } from '../../../util/store';
-
 import NotificationUtils from '../../../util/notification';
-
+import { connect } from 'react-redux';
+import { getToken } from '../../../util/store';
+import { UserInfoRemote } from '../../../actions';
 import './index.less';
-
-// interface IReg {
-//   RegInRemote: Redux.ActionCreator<any>
-// }
-
-// type IRegProps = IReg & Dispatch<any> & RouteComponentProps<any>
 
 export class Home extends React.Component<any, any> {
   constructor (props: any) {
     super(props)
     this.getUserInfo = this.getUserInfo.bind(this)
-    this.logOut = this.logOut.bind(this)
   }
   
   componentDidMount() {
@@ -40,17 +28,14 @@ export class Home extends React.Component<any, any> {
     const { dispatch } = this.props;
     dispatch(UserInfoRemote())
   }
-  logOut() {
-    const { dispatch } = this.props;
-    dispatch(Logout())
-  }
+
 
   render () {
     return(
-      <div>
-        <button className="home"> {this.props.userName}</button>
+      <div id="Home">
+        <button> {this.props.userName}</button>
         <button onClick={this.getUserInfo}> 获取用户信息 </button>
-        <button onClick={this.logOut}>退出登录</button>
+ 
       </div>
     )
   }

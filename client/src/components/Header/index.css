@@ -1,0 +1,33 @@
+#Header {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-width: 980px;
+}
+#Header .logoContent {
+  flex: 1;
+  min-width: 350px;
+}
+#Header .logoContent .logo {
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+}
+#Header .logoContent .title {
+  width: 250px;
+}
+#Header .menuContent {
+  flex: 2;
+  min-width: 450px;
+}
+#UserOperate {
+  margin-top: 10px;
+  flex: 1;
+}
+#UserOperate .operateBtn p,
+#UserOperate .operateBtn button {
+  display: inline-block;
+}
+#UserOperate .operateBtn button {
+  margin-left: 10px;
+}
