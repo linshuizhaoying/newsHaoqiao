@@ -4,7 +4,11 @@ import {
  } from '../constants';
 import notificationUtils from '../util/notification';
 export const errorReporter = (store: any) => (next: any) => (action: any) => {
-  console.log(action.data)
+  if(action.data === undefined){
+    // window.location.href = '/login'
+    return null
+  }
+
   if(action.data && action.data.state.code !== 1) {
     switch (action.type) {
       case USER_REG:

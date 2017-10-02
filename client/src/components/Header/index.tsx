@@ -12,9 +12,33 @@ export class Header extends React.Component<any, any> {
   }
   
   componentDidMount() {
+    console.log(this.props)
   }
 
   componentWillReceiveProps(nextProps: any) {
+  }
+
+  handleClick = (e: any) => {
+    switch(e.key){
+      case 'home':
+        this.props.tabChange('home')
+        return this.setState({current:'home'})      
+        
+      case 'tagCloud':
+        this.props.tabChange('tagCloud')
+        return this.setState({current:'tagCloud'})
+        
+      case 'systemSearch':
+        this.props.tabChange('systemSearch')
+        return this.setState({current:'systemSearch'})
+        
+      case 'debugSearch':
+        this.props.tabChange('debugSearch')
+        return this.setState({current:'debugSearch'})
+        
+      default:
+        return
+    }
   }
 
   render () {
@@ -33,7 +57,7 @@ export class Header extends React.Component<any, any> {
             <Menu.Item key="home">
               <Icon type="home" />首页
             </Menu.Item>
-            <Menu.Item key="label">
+            <Menu.Item key="tagCloud">
               <Icon type="cloud" />标签
             </Menu.Item>
             <Menu.Item key="systemSearch">
@@ -47,7 +71,7 @@ export class Header extends React.Component<any, any> {
         <div id="UserOperate">
           { this.props.isLogin === false ?
             <div className="operateBtn">
-              
+
               <Link to={{
                       pathname: '/reg',
                       state: {}

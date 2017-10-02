@@ -1,9 +1,15 @@
 import * as React from 'react';
-import NotificationUtils from '../../../util/notification';
+import DailyNews from '../../DailyNews/index';
 import { connect } from 'react-redux';
 import { getToken } from '../../../util/store';
+import { Tabs } from 'antd';
 import { UserInfoRemote } from '../../../actions';
 import './index.less';
+import Guidance from '../../Guidance/index';
+import Weekly from '../../Weekly/index';
+import Collection from '../../Collection/index';
+
+const TabPane = Tabs.TabPane;
 
 export class Home extends React.Component<any, any> {
   constructor (props: any) {
@@ -15,27 +21,60 @@ export class Home extends React.Component<any, any> {
     console.log(this.props)
   }
 
-  componentWillReceiveProps(nextProps: any) {
-    const { history } = this.props;
-    if(!nextProps.isLogin && getToken() === null){
-      NotificationUtils.notificationSuccess("退出成功!", "退出成功!", 2);
-      console.log('正在退出')
-      history.push('/login')
-    }
-  }
-
   getUserInfo() {
     const { dispatch } = this.props;
     dispatch(UserInfoRemote())
   }
+  
+  handleTab = (e: any) => {
+    switch(e){
+      case '1':
+        return this.dailyNews()
+      case '2':
+        return this.community()
+      case '3':
+        return this.weekly()
+      case '4':
+        return this.collection()
+      default:
+        return
+    }
+  }
+  dailyNews = () => {
+    console.log('dailyNews')    
+  }
 
+  community() {
+    console.log('community')    
+  }
+
+  weekly() {
+    console.log('weekly') 
+  }
+
+  collection() {
+    console.log('collection') 
+  }
 
   render () {
     return(
       <div id="Home">
-        <button> {this.props.userName}</button>
-        <button onClick={this.getUserInfo}> 获取用户信息 </button>
- 
+        {/* <button onClick={this.getUserInfo}> 获取用户信息 </button> */}
+        <Tabs tabPosition='left' onTabClick={this.handleTab} >
+          <TabPane tab="今日资讯" key="1" >
+            <DailyNews></DailyNews>
+          </TabPane>
+          <TabPane tab="社区导读" key="2">
+            <Guidance></Guidance>
+          </TabPane>
+
+          <TabPane tab="我的周报" key="3">
+            <Weekly></Weekly>
+          </TabPane>
+          <TabPane tab="我的收藏" key="4">
+            <Collection></Collection>
+          </TabPane>
+        </Tabs>
       </div>
     )
   }

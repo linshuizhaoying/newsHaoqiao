@@ -1,52 +1,86 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
-
-import Home from '../Routes/Home'
-import RegWrapper from '../Routes/Reg'
-import LoginWrapper from '../Routes/Login'
-import { Switch, Route } from 'react-router-dom';
-
+import DebugSearch from '../DebugSearch/index';
+import Header from '../../components/Header';
+import Home from '../Routes/Home';
+import LearningSearch from '../LearningSearch/index';
+import LoginWrapper from '../Routes/Login';
+import RegWrapper from '../Routes/Reg';
+import TagCloud from '../TagCloud/index';
+import { connect } from 'react-redux';
 import { getToken } from '../../util/store';
-import { Logout, TokenRemote } from '../../actions'
-import Header from '../../components/Header'
+import { Logout, TokenRemote } from '../../actions';
+import { Route, Switch } from 'react-router-dom';
 import './index.less';
+import NotificationUtils from '../../util/notification';
 
 export class App extends React.Component<any, any> {
   constructor (props: any) {
     super(props)
     this.logOut = this.logOut.bind(this)
+    this.tabHandle = this.tabHandle.bind(this)
   }
 
-  componentDidMount() {
+  checkLogin() {
     const { history } = this.props;
-    // 只要本地缓存token那就是登录状态
-    if (getToken() !== null) {
+     // 只要本地缓存token那就是登录状态
+     if (getToken() !== null) {
       console.log('登录状态')
       const { dispatch } = this.props;
       dispatch(TokenRemote())
-      history.push('/home')
-
     } else {
       console.log('未登录状态')
-      console.log(getToken())
       history.push('/login')
     }
   }
 
+  componentDidMount() {
+    console.log(this.props)
+    this.checkLogin()
+   
+  }
+  componentWillReceiveProps(nextProps: any) {
+    console.log(nextProps)
+  }
+
   logOut() {
-    const { dispatch } = this.props;
+    const { dispatch, history } = this.props;
     dispatch(Logout())
+    NotificationUtils.notificationSuccess("退出成功!", "退出成功!", 2);    
+    history.push('/login')
+  }
+
+  tabHandle(type: string) {
+    const { history } = this.props;
+    switch(type){
+      case 'home':
+        history.push('/home')  
+        return
+      case 'tagCloud':
+        history.push('/tagCloud')  
+        return
+      case 'systemSearch':
+        history.push('/systemSearch')  
+        return
+      case 'debugSearch':
+        history.push('/debugSearch') 
+        return
+      default:
+        return
+    }
   }
 
   render() {
     return (
       <div className="App">
-        <Header isLogin={this.props.isLogin} userName={this.props.userName} logOut={this.logOut}></Header>
+        <Header isLogin={this.props.isLogin} userName={this.props.userName} logOut={this.logOut} tabChange={this.tabHandle}></Header>
         <div className="App-content">
           <Switch>
             <Route path="/home" component={Home}/> 
             <Route path="/reg" component={RegWrapper}/> 
             <Route path="/login" component={LoginWrapper}/> 
+            <Route path="/tagCloud" component={TagCloud}/> 
+            <Route path="/systemSearch" component={LearningSearch}/> 
+            <Route path="/debugSearch" component={DebugSearch}/> 
           </Switch>
         </div>
       </div>

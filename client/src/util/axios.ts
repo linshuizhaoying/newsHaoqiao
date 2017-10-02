@@ -18,7 +18,8 @@ let instance = axios.create({
 instance.interceptors.response.use(
   response => {
     console.log(response)
-    if (response.status === 401) {      
+    if (response.status === 401) {
+      console.log(401)      
       return Promise.reject(response.data)
     } else if (response.status >= 400) {
       return Promise.reject(response.data)
@@ -28,6 +29,7 @@ instance.interceptors.response.use(
   },
   error => {
     NotificationUtils.notificationError('获取失败!','身份验证失败',3)
+    console.log(error)
     Promise.reject(error)
   }
 

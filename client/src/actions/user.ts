@@ -43,7 +43,8 @@ const userToken = (data: any) => ({
 })
 
 const userLogout = () => ({
-  type: USER_LOGOUT
+  type: USER_LOGOUT,
+  data: null
 })
 
 export function RegInRemote (user: IRegData) {
@@ -78,7 +79,12 @@ export function TokenRemote (){
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
   return (dispatch: any) => axios.get(TOKEN_API)
   .then((info: any) => {
-    dispatch(userToken(info))
+    console.log(info)
+    if(info === undefined){
+      removeToken()
+    }else{
+      dispatch(userToken(info))
+    }
     return info
   })
 }
