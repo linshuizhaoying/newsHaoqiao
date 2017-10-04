@@ -33,7 +33,7 @@ exports.AddRegUser = (user) => __awaiter(this, void 0, void 0, function* () {
         yield newUser.save().then((data) => {
             console.log('保存后的信息为:');
             console.log(data);
-            result.msg = '用户添加成功!';
+            result.msg = '用户注册成功!';
             result.status = 'success';
             result.userId = data._id;
             result.userName = data.username;

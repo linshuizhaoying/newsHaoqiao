@@ -42,7 +42,7 @@ export const AddRegUser = async(user: RegUser) => {
     await newUser.save().then( (data: any) => {
       console.log('保存后的信息为:' )
       console.log(data)
-      result.msg = '用户添加成功!'
+      result.msg = '用户注册成功!'
       result.status = 'success'
       result.userId = data._id
       result.userName = data.username

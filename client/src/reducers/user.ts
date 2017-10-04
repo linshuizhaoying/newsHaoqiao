@@ -14,7 +14,7 @@ const initialState = {
 }
 
 const user = (state = initialState, action: any) => {
-  console.log(action)
+  // console.log(action)
   switch (action.type) {
     case USER_REG:
       return {
@@ -44,10 +44,10 @@ const user = (state = initialState, action: any) => {
         userName: action.data.data.userName
       } 
     case USER_LOGOUT:
-      console.log('logout 2')
+     
       return{
         ...state,
-        isLogin: '',
+        isLogin: false,
         userName: null,
         token: null,
         userId: null

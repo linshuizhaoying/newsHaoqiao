@@ -1,0 +1,53 @@
+.NewsItem{
+  display: flex;
+  margin: 0 10px;
+  .num{
+    flex: 1 1;
+    display: table;
+    padding:0 20px;
+  }
+  .content{
+    flex: 5;
+    display: flex;
+    padding-top: 2px;
+    .newsTitle{
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 10pt;
+    }
+    .source{
+      margin-left:20px;
+    }
+  }
+  .time{
+    flex: 1;
+    padding-top: 2px;
+  }
+  .operate{
+    flex:1;
+    display: flex;
+    .like{
+      flex:1;
+      cursor: pointer;
+      &:hover{
+        color:red;
+      }
+    }
+    .islike{
+      color:red;
+    }
+    .addCollection{
+      flex:1;
+      cursor: pointer;
+      &:hover{
+        color:red;
+      }
+    }
+  }
+  a{
+    text-decoration: none;
+    color: #828282;
+  }
+}
+.hadTag{
+  color:red;
+}

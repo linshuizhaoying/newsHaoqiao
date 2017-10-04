@@ -66,7 +66,7 @@ export function LoginInRemote (user: ILoginData) {
 
 export function UserInfoRemote (){
   // 写入权限验证
-  console.log(getToken())
+ // console.log(getToken())
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
   return (dispatch: any) => axios.get(USERINFO_API)
   .then((info: any) => {
@@ -79,7 +79,7 @@ export function TokenRemote (){
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
   return (dispatch: any) => axios.get(TOKEN_API)
   .then((info: any) => {
-    console.log(info)
+   // console.log(info)
     if(info === undefined){
       removeToken()
     }else{

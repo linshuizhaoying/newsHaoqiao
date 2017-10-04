@@ -1,0 +1,53 @@
+.NewsItem {
+  display: flex;
+  margin: 0 10px;
+}
+.NewsItem .num {
+  flex: 1 1;
+  display: table;
+  padding: 0 20px;
+}
+.NewsItem .content {
+  flex: 5;
+  display: flex;
+  padding-top: 2px;
+}
+.NewsItem .content .newsTitle {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 10pt;
+}
+.NewsItem .content .source {
+  margin-left: 20px;
+}
+.NewsItem .time {
+  flex: 1;
+  padding-top: 2px;
+}
+.NewsItem .operate {
+  flex: 1;
+  display: flex;
+}
+.NewsItem .operate .like {
+  flex: 1;
+  cursor: pointer;
+}
+.NewsItem .operate .like:hover {
+  color: red;
+}
+.NewsItem .operate .islike {
+  color: red;
+}
+.NewsItem .operate .addCollection {
+  flex: 1;
+  cursor: pointer;
+}
+.NewsItem .operate .addCollection:hover {
+  color: red;
+}
+.NewsItem a {
+  text-decoration: none;
+  color: #828282;
+}
+.hadTag {
+  color: red;
+}

@@ -1,0 +1,21 @@
+#DailyNews {
+  background-color: #F6F6EF;
+  height: 560px;
+}
+#DailyNews .dailyThead {
+  display: flex;
+  padding: 20px;
+  font-size: 16px;
+}
+#DailyNews .dailyThead .dropdown {
+  flex: 2;
+  display: flex;
+}
+#DailyNews .dailyThead .dropdown a {
+  color: red;
+}
+#DailyNews .dailyThead .switch {
+  flex: 3;
+  display: flex;
+  flex-direction: row-reverse;
+}
