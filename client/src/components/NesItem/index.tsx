@@ -1,5 +1,6 @@
 import * as React from 'react';
 import NotificationUtils from '../../util/notification';
+import _ from 'lodash'
 import TimeAgo from 'timeago-react';
 import {
   Badge,
@@ -13,14 +14,25 @@ export class NewsItem extends React.Component<any, any> {
   constructor (props: any) {
     super(props)
     this.like = this.like.bind(this)
+    this.menuSelect = this.menuSelect.bind(this)
     this.state ={
-      isLike:false
+      isLike:false,
+      tagList:'',
+      myTagList:''
     }
   }
   
-  componentDidMount() {
+  componentWillMount() {
+    // 求差集,将原有的tag过滤出去
+    let difference = 
+      this.props.tagList
+      .concat(this.props.myTagList)
+      .filter((v: any) => !this.props.tagList.includes(v) || !this.props.myTagList.includes(v))
+
     this.setState({
-      isLike: this.props.data.like
+      isLike: this.props.data.like,
+      tagList: difference,
+      myTagList: this.props.myTagList
     })
   }
 
@@ -41,24 +53,52 @@ export class NewsItem extends React.Component<any, any> {
   }
 
   menuSelect(key: any){
-    console.log(key.key)
+    let newKey = key.key.replace('cancel ','')
+    let [...newArr] = this.state.myTagList
+    let [...myArr] = this.state.tagList
     if(key.key.includes('cancel')){
+      myArr.push(newKey)
+      _.remove(newArr, function(n: any) {
+        return n === newKey
+      });
+      this.setState({
+        myTagList: newArr,
+        tagList: myArr
+      })
       NotificationUtils.notificationSuccess('去除标签成功!','已将咨询去除该标签',3) 
     }else{
-      NotificationUtils.notificationSuccess('添加标签成功!','已将咨询添加新标签',3) 
+      newArr.push(newKey)
+      _.remove(myArr, function(n: any) {
+        return n === newKey
+      });
+      this.setState({
+        myTagList: newArr,
+        tagList: myArr
+      })
+
+      NotificationUtils.notificationSuccess('添加标签成功!','已将咨询添加新标签'+key.key,3) 
     }
   }
 
   render () {
     const menu = (
       <Menu onClick ={this.menuSelect}>
-        <SubMenu title="添加新标签 ">
-          <Menu.Item key="前端集成"><span className="hadTag">前端基础</span></Menu.Item>
-          <Menu.Item key="React"><span>React</span></Menu.Item>
+        <Menu.Item disabled>选择该咨询的分类标签</Menu.Item>
+        <Menu.Divider />
+        <SubMenu title="添加标签">
+          {
+            this.state.tagList.map((item :any,key :any)=>{
+               return <Menu.Item type="add" key={item}><span className="hadTag">{item}</span></Menu.Item>
+            })
+          }
         </SubMenu>
-        <SubMenu title="去除标签 ">
-          <Menu.Item key="cancel前端集成"><span>前端基础</span></Menu.Item>
-          <Menu.Item key="cancelReact"><span>React</span></Menu.Item>
+        <SubMenu title="去除标签">
+          {
+            this.state.myTagList.map((item :any,key :any)=>{
+               return <Menu.Item key={'cancel ' + item}><span>{item}</span></Menu.Item>
+            })
+          }
+
         </SubMenu>
       </Menu>
     );
@@ -82,9 +122,6 @@ export class NewsItem extends React.Component<any, any> {
         </div>
 
         <div className="operate">
-          <div className={ 'like' + ` ${this.state.isLike ? 'islike' : 'unlike'}`} onClick={this.like}>
-            <Icon type="heart"></Icon>
-          </div>
 
           <div className="addCollection">
             <Dropdown overlay={menu} trigger={['click']}>
@@ -93,6 +130,11 @@ export class NewsItem extends React.Component<any, any> {
               </a>
             </Dropdown>
           </div>
+
+          <div className={ 'like' + ` ${this.state.isLike ? 'islike' : 'unlike'}`} onClick={this.like}>
+            <Icon type="heart"></Icon>
+          </div>
+
 
         </div>
       </div>

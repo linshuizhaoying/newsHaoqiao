@@ -28,7 +28,7 @@ export class NewsList extends React.Component<any, any> {
       nextProps.data.map((item: any, key: any) =>{
          arr.push({
           key: key,
-          item: <NewsItem key={key} data={item} index={key + 1}></NewsItem>
+          item: <NewsItem myTagList={item.tagList} tagList={this.props.tagList} key={key} data={item} index={key + 1}></NewsItem>
          })
       })
       this.setState({
@@ -42,7 +42,7 @@ export class NewsList extends React.Component<any, any> {
 
   render () {
     return(
-      <div id="NewsList">
+      <div id="NewsList" className={this.props.show ? 'show' : 'hide'}>
         {/* {
           this.props.data ? this.props.data.map((item: any, key: any) =>{
             return <NewsItem data={item} index={key + 1}></NewsItem>

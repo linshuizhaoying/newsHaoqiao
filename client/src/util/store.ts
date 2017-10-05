@@ -1,4 +1,4 @@
-export const setToken = (token: string) => {
+export const setToken = (token: any) => {
   window.localStorage.setItem('token', token)
 }
 

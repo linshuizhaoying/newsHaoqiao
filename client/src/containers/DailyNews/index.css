@@ -14,8 +14,17 @@
 #DailyNews .dailyThead .dropdown a {
   color: red;
 }
+#DailyNews .dailyThead .newtag {
+  margin-left: 40px;
+}
 #DailyNews .dailyThead .switch {
   flex: 3;
   display: flex;
   flex-direction: row-reverse;
+}
+.show {
+  display: block;
+}
+.hide {
+  display: none;
 }

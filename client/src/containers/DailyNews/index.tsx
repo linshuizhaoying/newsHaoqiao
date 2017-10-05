@@ -1,7 +1,15 @@
-import { Promise } from 'es6-promise';
 import * as React from 'react';
 import NewsList from '../../components/NewsList/index';
-import { Dropdown, Icon, Menu, Switch } from 'antd';
+import NewTag from '../../components/NewTag/index';
+import Loader from '../../components/Loader/index';
+
+
+import {
+  Dropdown,
+  Icon,
+  Menu,
+  Switch
+  } from 'antd';
 import './index.less';
 
 export class DailyNews extends React.Component<any, any> {
@@ -12,9 +20,21 @@ export class DailyNews extends React.Component<any, any> {
     this.state = {
       allData: '',
       currentDailyData: '',
+      tagList:'',
       currentDataTime: '过去24小时',
-      currentLanguage: 'cn'
+      currentLanguage: 'cn',
+      loading: true
     }
+  }
+
+  getTagList() {
+    let tagList = ['前端','Node.js','css','javascript','vue','react','typescript','redis','mongodb','es6']
+    this.setState({
+      tagList: tagList
+    })
+    
+
+
   }
   
   getDailyData() {
@@ -23,7 +43,7 @@ export class DailyNews extends React.Component<any, any> {
       "newsList":[
         {
           id:'001',
-          title:'[译] Web 真相：CSS 不是真正的编程',
+          title:'[译] Web 真相：cSS 不是真正的编程',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
           source:'开发者头条',
@@ -35,11 +55,11 @@ export class DailyNews extends React.Component<any, any> {
           read:'1',
           like:false,
           score:'1',
-          tagList:['前端基础','Css'],
+          tagList:['前端','css'],
         },
         {
           id:'002',
-          title:'express 源码阅读（上）',
+          title:'typescript 源码阅读（上）',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
           source:'开发者头条',
@@ -51,11 +71,11 @@ export class DailyNews extends React.Component<any, any> {
           read:'1',
           like:false,
           score:'1',
-          tagList:['前端基础','Express'],
+          tagList:['前端','typescript'],
         },
         {
          id:'003',
-         title:'JavaScript 闭包',
+         title:'javaScript 闭包',
          enTitle:'',
          link:'http://toutiao.io//k/g8bv5e',
          source:'开发者头条',
@@ -67,7 +87,7 @@ export class DailyNews extends React.Component<any, any> {
          read:'1',
          like:false,
          score:'1',
-         tagList:['前端基础','Javascript'],
+         tagList:['前端','javascript'],
         },
         {
           id:'004',
@@ -83,7 +103,7 @@ export class DailyNews extends React.Component<any, any> {
           read:'1',
           like:false,
           score:'1',
-          tagList:['前端基础','Javascript'],
+          tagList:['前端','javascript'],
          },
          {
           id:'005',
@@ -99,11 +119,11 @@ export class DailyNews extends React.Component<any, any> {
           read:'12',
           like:true,
           score:'21',
-          tagList:['前端基础','Javascript'],
+          tagList:['前端','javascript'],
          },
          {
           id:'006',
-          title:'2017年Android面试复习资料整理',
+          title:'2017年react面试复习资料整理',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
           source:'segmentfault',
@@ -115,7 +135,7 @@ export class DailyNews extends React.Component<any, any> {
           read:'12',
           like:true,
           score:'21',
-          tagList:['Android'],
+          tagList:['react'],
          },
          {
           id:'007',
@@ -134,7 +154,7 @@ export class DailyNews extends React.Component<any, any> {
           tagList:['Vue'],
          },{
           id:'008',
-          title:'[译] Web 真相：CSS 不是真正的编程',
+          title:'[译] Web 真相：cSS 不是真正的编程',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
           source:'开发者头条',
@@ -146,11 +166,11 @@ export class DailyNews extends React.Component<any, any> {
           read:'1',
           like:false,
           score:'1',
-          tagList:['前端基础','Css'],
+          tagList:['前端','css'],
         },
         {
           id:'009',
-          title:'express 源码阅读（上）',
+          title:'typescript 源码阅读（上）',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
           source:'开发者头条',
@@ -162,11 +182,11 @@ export class DailyNews extends React.Component<any, any> {
           read:'1',
           like:false,
           score:'1',
-          tagList:['前端基础','Express'],
+          tagList:['前端','typescript'],
         },
         {
          id:'010',
-         title:'JavaScript 闭包',
+         title:'javaScript 闭包',
          enTitle:'',
          link:'http://toutiao.io//k/g8bv5e',
          source:'开发者头条',
@@ -178,7 +198,7 @@ export class DailyNews extends React.Component<any, any> {
          read:'1',
          like:false,
          score:'1',
-         tagList:['前端基础','Javascript'],
+         tagList:['前端','javascript'],
         },
         {
           id:'011',
@@ -194,7 +214,7 @@ export class DailyNews extends React.Component<any, any> {
           read:'1',
           like:false,
           score:'1',
-          tagList:['前端基础','Javascript'],
+          tagList:['前端','javascript'],
          },
          {
           id:'012',
@@ -210,11 +230,11 @@ export class DailyNews extends React.Component<any, any> {
           read:'12',
           like:true,
           score:'21',
-          tagList:['前端基础','Javascript'],
+          tagList:['前端','javascript'],
          },
          {
           id:'013',
-          title:'2017年Android面试复习资料整理',
+          title:'2017年react面试复习资料整理',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
           source:'segmentfault',
@@ -226,7 +246,7 @@ export class DailyNews extends React.Component<any, any> {
           read:'12',
           like:true,
           score:'21',
-          tagList:['Android'],
+          tagList:['react'],
          },
          {
           id:'014',
@@ -258,12 +278,12 @@ export class DailyNews extends React.Component<any, any> {
           read:'1',
           like:false,
           score:'1',
-          tagList:['前端基础','Javascript'],
+          tagList:['前端','javascript'],
          },
          {
           id:'016',
           title:'setTimeout与setInterval的区别和nodejs中的差异',
-          enTitle:'CSS font-variant tester',
+          enTitle:'cSS font-variant tester',
           link:'http://toutiao.io//k/g8bv5e',
           source:'segmentfault',
           sourceLink:'segmentfault.com',
@@ -274,11 +294,11 @@ export class DailyNews extends React.Component<any, any> {
           read:'12',
           like:true,
           score:'21',
-          tagList:['前端基础','Javascript'],
+          tagList:['前端','javascript'],
          },
          {
           id:'017',
-          title:'2017年Android面试复习资料整理',
+          title:'2017年react面试复习资料整理',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
           source:'segmentfault',
@@ -290,7 +310,7 @@ export class DailyNews extends React.Component<any, any> {
           read:'12',
           like:true,
           score:'21',
-          tagList:['Android'],
+          tagList:['react'],
          },
          {
           id:'018',
@@ -311,7 +331,7 @@ export class DailyNews extends React.Component<any, any> {
          {
           id:'019',
           title:'xxxxx',
-          enTitle:'CSS font-display: The Future of Font Rendering on the Web',
+          enTitle:'cSS font-display: The Future of Font Rendering on the Web',
           link:'https://www.sitepoint.com/css-font-display-future-font-rendering-web/',
           source:'sitepoint',
           sourceLink:'sitepoint.com',
@@ -322,7 +342,7 @@ export class DailyNews extends React.Component<any, any> {
           read:'12',
           like:true,
           score:'21',
-          tagList:['CSS'],
+          tagList:['cSS'],
          },
          {
           id:'020',
@@ -338,7 +358,7 @@ export class DailyNews extends React.Component<any, any> {
           read:'12',
           like:true,
           score:'21',
-          tagList:['CSS'],
+          tagList:['cSS'],
          }
       ]
     }
@@ -346,6 +366,7 @@ export class DailyNews extends React.Component<any, any> {
       allData: data,
     },()=>{
       this.changeLanguage('cn')
+      setTimeout(()=>{this.setState({loading:false})},3000)
     })
   }
   /** 
@@ -370,12 +391,14 @@ export class DailyNews extends React.Component<any, any> {
       })
     }
     newsList = temp
+    
     this.setState({
       currentDailyData: newsList,
     })
     
   }
   componentDidMount() {
+    this.getTagList()
     this.getDailyData()
   }
 
@@ -439,15 +462,20 @@ export class DailyNews extends React.Component<any, any> {
                 {this.state.currentDataTime} <Icon type="down" />
               </a>
             </Dropdown>
+            <NewTag></NewTag>
           </div>
           <div className="switch">
+           
             <Switch checkedChildren="切换中文咨询" unCheckedChildren="切换英文咨询" onChange={this.toggleLanguage}/>
           </div>
         </div>
         <hr></hr>
 
 
-        <NewsList data={this.state.currentDailyData}></NewsList>
+        <Loader show={this.state.loading} ></Loader>
+        <NewsList show={!this.state.loading} data={this.state.currentDailyData} tagList={this.state.tagList}>
+         
+        </NewsList>
       </div>
     )
   }
