@@ -1,17 +1,19 @@
 import * as React from 'react';
+
 import DebugSearch from '../DebugSearch/index';
 import Header from '../../components/Header';
 import Home from '../Routes/Home';
 import LearningSearch from '../LearningSearch/index';
 import LoginWrapper from '../Routes/Login';
+import NotificationUtils from '../../util/notification';
 import RegWrapper from '../Routes/Reg';
 import TagCloud from '../TagCloud/index';
 import { connect } from 'react-redux';
 import { getToken } from '../../util/store';
-import { Logout, TokenRemote } from '../../actions';
+import { Logout, TagListRemote, TokenRemote } from '../../actions';
 import { Route, Switch } from 'react-router-dom';
 import './index.less';
-import NotificationUtils from '../../util/notification';
+
 
 export class App extends React.Component<any, any> {
   constructor (props: any) {
@@ -32,14 +34,19 @@ export class App extends React.Component<any, any> {
       history.push('/login')
     }
   }
-
+  
+  componentWillMount() {
+    const { dispatch } = this.props;
+    dispatch(TagListRemote())
+  }
   componentDidMount() {
-    console.log(this.props)
     this.checkLogin()
-   
   }
   componentWillReceiveProps(nextProps: any) {
-    console.log(nextProps)
+    const { history } = this.props;
+    if(nextProps.userName === 'admin'){
+      history.push('/xyt')
+    }
   }
 
   logOut() {
@@ -58,8 +65,8 @@ export class App extends React.Component<any, any> {
       case 'tagCloud':
         history.push('/tagCloud')  
         return
-      case 'systemSearch':
-        history.push('/systemSearch')  
+      case 'learningSearch':
+        history.push('/learningSearch')  
         return
       case 'debugSearch':
         history.push('/debugSearch') 
@@ -79,8 +86,9 @@ export class App extends React.Component<any, any> {
             <Route path="/reg" component={RegWrapper}/> 
             <Route path="/login" component={LoginWrapper}/> 
             <Route path="/tagCloud" component={TagCloud}/> 
-            <Route path="/systemSearch" component={LearningSearch}/> 
+            <Route path="/learningSearch" component={LearningSearch}/> 
             <Route path="/debugSearch" component={DebugSearch}/> 
+          
           </Switch>
         </div>
       </div>
@@ -90,6 +98,7 @@ export class App extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   isLogin: state.user.isLogin,
   userName: state.user.userName,
+  tagList: state.info.tagList
 })
 
 App = connect(mapStateToProps)(App);

@@ -16,11 +16,13 @@ const config_1 = require("../config");
 const router = new Irouter({ prefix: config_1.config.app.baseApi });
 exports.Router = (app) => {
     // 用户 注册 登录
-    const { reg, login, userInfo } = Service;
+    const { reg, login, userInfo, requestFrame, onlineTest } = Service;
     router.post('/reg', Service.reg)
         .post('/login', Service.login)
         .get('/userInfo', token_1.default, Service.userInfo)
-        .get('/token', token_1.default, Service.token);
+        .get('/token', token_1.default, Service.token)
+        .get('/requestFrame/:link', Service.requestFrame)
+        .post('/onlineTest', Service.onlineTest);
     router.all('/*', (ctx, next) => __awaiter(this, void 0, void 0, function* () {
         ctx.body = '404';
     }));

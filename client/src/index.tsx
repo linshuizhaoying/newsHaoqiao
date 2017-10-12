@@ -6,6 +6,7 @@ import { createBrowserHistory } from 'history';
 import { configureStore } from './store';
 import { App } from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
+import AdminManage from './containers/AdminManage/index';
 
 const store = configureStore();
 const history = createBrowserHistory();
@@ -14,6 +15,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Switch>
+        <Route path="/xyt" component={AdminManage}/> 
         <Route path="/" component={App} />
       </Switch>
     </Router>

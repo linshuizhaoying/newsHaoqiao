@@ -10,13 +10,15 @@ const router = new Irouter({prefix: config.app.baseApi})
 export const Router = (app: any) => {
 
   // 用户 注册 登录
-  const { reg, login, userInfo } = Service
+  const { reg, login, userInfo, requestFrame, onlineTest } = Service
   router.post('/reg', Service.reg)
         .post('/login', Service.login)
         .get('/userInfo', tokenPermission, Service.userInfo)
         // 用于持久化登录,只要auth头有未过期的token验证就能证明用户的登录状态
         .get('/token', tokenPermission, Service.token)
-
+        // 管理员操作
+        .get('/requestFrame/:link', Service.requestFrame)
+        .post('/onlineTest', Service.onlineTest)
   router.all('/*',  async (ctx, next) => {
     ctx.body = '404'
   })

@@ -116,6 +116,7 @@ export class NewsItem extends React.Component<any, any> {
              (<a  target="_blank" href={'http://' + this.props.data.sourceLink}>{this.props.data.source}</a>)
           </div>
         </div>
+        
         <div className="time">
           <TimeAgo datetime={this.props.data.createDate || "2017-10-01"} 
            locale='zh_CN' />

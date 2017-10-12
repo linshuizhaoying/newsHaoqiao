@@ -23,7 +23,9 @@ export class NewsList extends React.Component<any, any> {
   }
 
   componentWillReceiveProps(nextProps: any) {
+    // console.log(nextProps.data )
     if(nextProps.data && nextProps.data.length > 0){
+      // console.log('received')
       let arr: any[] = []
       nextProps.data.map((item: any, key: any) =>{
          arr.push({
@@ -33,8 +35,6 @@ export class NewsList extends React.Component<any, any> {
       })
       this.setState({
         dataSource: arr
-      },()=>{
-        console.log(this.state.dataSource)
       })
     }
 

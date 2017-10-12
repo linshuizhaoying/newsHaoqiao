@@ -2,7 +2,7 @@ import * as React from 'react';
 import NewsList from '../../components/NewsList/index';
 import NewTag from '../../components/NewTag/index';
 import Loader from '../../components/Loader/index';
-
+import { connect } from 'react-redux';
 
 import {
   Dropdown,
@@ -28,13 +28,9 @@ export class DailyNews extends React.Component<any, any> {
   }
 
   getTagList() {
-    let tagList = ['前端','Node.js','css','javascript','vue','react','typescript','redis','mongodb','es6']
     this.setState({
-      tagList: tagList
+      tagList: this.props.tagList
     })
-    
-
-
   }
   
   getDailyData() {
@@ -397,12 +393,14 @@ export class DailyNews extends React.Component<any, any> {
     })
     
   }
+
   componentDidMount() {
     this.getTagList()
     this.getDailyData()
   }
 
   componentWillReceiveProps(nextProps: any) {
+
   }
 
   dropSelect = (key: any) => {
@@ -481,5 +479,10 @@ export class DailyNews extends React.Component<any, any> {
   }
 }
 
+const mapStateToProps = (state: any) => ({
+  tagList: state.info.tagList
+})
+
+DailyNews = connect(mapStateToProps)(DailyNews);
 
 export default DailyNews;

@@ -28,9 +28,9 @@ export class Header extends React.Component<any, any> {
         this.props.tabChange('tagCloud')
         return this.setState({current:'tagCloud'})
         
-      case 'systemSearch':
-        this.props.tabChange('systemSearch')
-        return this.setState({current:'systemSearch'})
+      case 'learningSearch':
+        this.props.tabChange('learningSearch')
+        return this.setState({current:'learningSearch'})
         
       case 'debugSearch':
         this.props.tabChange('debugSearch')
@@ -60,7 +60,7 @@ export class Header extends React.Component<any, any> {
             <Menu.Item key="tagCloud">
               <Icon type="cloud" />标签
             </Menu.Item>
-            <Menu.Item key="systemSearch">
+            <Menu.Item key="learningSearch">
               <Icon type="search" />知识结构搜索
             </Menu.Item>
             <Menu.Item key="debugSearch">

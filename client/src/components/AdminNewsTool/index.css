@@ -1,0 +1,38 @@
+#AdminNewsTool {
+  display: flex;
+  height: 100%;
+}
+#AdminNewsTool .base {
+  flex: 2;
+  border: 1px solid #EEF0F4;
+  margin: 5px;
+  padding: 10px;
+}
+#AdminNewsTool .demo {
+  flex: 5;
+  border: 1px solid #EEF0F4;
+  margin: 5px;
+  overflow: scroll;
+  padding: 15px;
+}
+#AdminNewsTool .demo iframe {
+  width: 680px;
+  height: 250px;
+  margin: 3%;
+}
+#AdminNewsTool .demo .element {
+  display: flex;
+}
+#AdminNewsTool .demo .element .ant-input-group-wrapper {
+  width: 300px;
+  margin-left: 80px;
+}
+#AdminNewsTool .frame {
+  width: 30%;
+}
+#AdminNewsTool .test {
+  text-align: center;
+}
+#AdminNewsTool .result {
+  margin-bottom: 20px;
+}

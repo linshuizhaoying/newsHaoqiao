@@ -72,11 +72,13 @@ class Login extends React.Component<any, any> {
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
-      if (!err) {
-        let {username, password} = values;
+      let {username, password} = values;
+      
+      if (!err && username.length > 0 && password.length > 0) {
         const { dispatch } = this.props;
         dispatch(LoginInRemote({username, password}))
       }
+      
     });
   }
   render() {
