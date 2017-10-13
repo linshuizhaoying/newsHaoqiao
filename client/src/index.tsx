@@ -6,8 +6,8 @@ import { createBrowserHistory } from 'history';
 import { configureStore } from './store';
 import { App } from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
-import AdminManage from './containers/AdminManage/index';
-
+import AdminManage from './containers/App/containers/AdminManage/index';
+AdminManage
 const store = configureStore();
 const history = createBrowserHistory();
 

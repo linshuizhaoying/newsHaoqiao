@@ -1,13 +1,15 @@
 import * as React from 'react';
 import './index.less';
 import { Table, Button } from 'antd';
-import { Link } from 'react-router-dom';
-import NotificationUtils from '../../util/notification';
+import { connect } from 'react-redux';
+import NotificationUtils from '../../../../../../util/notification';
+import { checkLocalSource } from '../../../../../../actions/admin';
 
 export class AdminNewsCheck extends React.Component<any, any> {
   constructor (props: any) {
     super(props)
     this.reject = this.reject.bind(this)
+    this.checkSource = this.checkSource.bind(this)
     this.state ={
       filteredInfo: null,
       sortedInfo: null,
@@ -70,6 +72,19 @@ export class AdminNewsCheck extends React.Component<any, any> {
     })
   }
 
+  checkSource = (url: string) =>{
+    const { dispatch, history } = this.props;
+    const info ={
+      currentId: '',
+      currentLink: url,
+      currentTitle: '',
+      currentLang: '',
+      currentCode: '',
+    }
+    dispatch(checkLocalSource(info))
+    history.push({ pathname: '/xyt/newsTool'});
+  }
+
   render () {
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
@@ -105,13 +120,11 @@ export class AdminNewsCheck extends React.Component<any, any> {
       render: (text :any, record:any) => {
         return (
           <div>
-            <Link to={{
-                  pathname: '/xyt/newsTool/' +  encodeURIComponent(record.source),
-                }}>
-              <Button type="primary">
+    
+              <Button type="primary" onClick={()=>{this.checkSource(encodeURIComponent(record.source))}}>
                 去验证
                </Button>
-            </Link>
+          
            <Button type="danger" onClick={()=>this.reject(record.key)}>拒绝</Button>
           
           </div>
@@ -125,6 +138,11 @@ export class AdminNewsCheck extends React.Component<any, any> {
     );
   }
 }
+const mapStateToProps = (state: any) => ({
+  isLogin: state.user.isLogin,
 
+})
+
+AdminNewsCheck = connect(mapStateToProps)(AdminNewsCheck);
 
 export default AdminNewsCheck;

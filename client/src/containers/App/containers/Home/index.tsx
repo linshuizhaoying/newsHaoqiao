@@ -1,13 +1,13 @@
 import * as React from 'react';
-import DailyNews from '../../DailyNews/index';
+import Collection from './containers/Collection/index';
+import DailyNews from './containers/DailyNews/index';
+import Guidance from './containers/Guidance/index';
+import Weekly from './containers/Weekly/index';
 import { connect } from 'react-redux';
-import { getToken } from '../../../util/store';
 import { Tabs } from 'antd';
-import { UserInfoRemote } from '../../../actions';
+import { UserInfoRemote } from '../../../../actions/user';
 import './index.less';
-import Guidance from '../../Guidance/index';
-import Weekly from '../../Weekly/index';
-import Collection from '../../Collection/index';
+
 
 const TabPane = Tabs.TabPane;
 

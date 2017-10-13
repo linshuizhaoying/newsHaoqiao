@@ -1,18 +1,19 @@
 import * as React from 'react';
-
-import DebugSearch from '../DebugSearch/index';
+import DebugSearch from './containers/Home/containers/DebugSearch/index';
 import Header from '../../components/Header';
-import Home from '../Routes/Home';
-import LearningSearch from '../LearningSearch/index';
-import LoginWrapper from '../Routes/Login';
+import Home from './containers/Home/index';
+import LearningSearch from './containers/Home/containers/LearningSearch/index';
+import LoginWrapper from './containers/Home/containers/Login/index';
 import NotificationUtils from '../../util/notification';
-import RegWrapper from '../Routes/Reg';
-import TagCloud from '../TagCloud/index';
+import RegWrapper from './containers/Home/containers/Reg/index';
+import TagCloud from './containers/Home/containers/TagCloud/index';
 import { connect } from 'react-redux';
 import { getToken } from '../../util/store';
 import { Logout, TagListRemote, TokenRemote } from '../../actions';
 import { Route, Switch } from 'react-router-dom';
 import './index.less';
+
+
 
 
 export class App extends React.Component<any, any> {

@@ -1,7 +1,8 @@
 
 import * as React from 'react';
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
-import { Link } from 'react-router-dom';
+import { checkLocalSource } from '../../../../../../actions/admin';
+import { connect } from 'react-redux';
 import './index.less';
 
 
@@ -58,6 +59,23 @@ export class AdminNewsList extends React.Component<any, any> {
     const { history } = this.props;
     history.push('/xyt/newsTool/empty')
   }
+
+  checkSource = (key: string, url: string, title: string, lang:string, type:string,code:string ) =>{
+    const { dispatch, history } = this.props;
+    const info ={
+      currentId: key,
+      currentLink: url,
+      currentTitle: title,
+      currentLang:  lang,
+      currentType: type,
+      currentCode: code,
+    }
+    dispatch(checkLocalSource(info))
+    history.push({ pathname: '/xyt/newsTool'});
+  }
+
+
+
   render() {
     const { dataSource } = this.state;
     const columns = 
@@ -82,13 +100,9 @@ export class AdminNewsList extends React.Component<any, any> {
           this.state.dataSource.length > 0 ?
           (
             <div>
-              <Link to={{
-                  pathname: '/xyt/newsTool/' +  encodeURIComponent(record.url),
-                }}>
-                <Button type="primary">
+                <Button type="primary" onClick={()=>{this.checkSource(record.key,encodeURIComponent(record.url),record.title,record.lang,record.type,record.code)}}>
                   验证
                 </Button>
-              </Link>
     
               <Popconfirm title="确定要删除么?" onConfirm={() => this.onChangeStatus(record.key)}>
                 <Button type="danger">删除</Button>
@@ -107,5 +121,11 @@ export class AdminNewsList extends React.Component<any, any> {
   }
 }
 
+const mapStateToProps = (state: any) => ({
+  currentSourceData: state.admin.currentSourceData,
+
+})
+
+AdminNewsList = connect(mapStateToProps)(AdminNewsList);
 
 export default AdminNewsList;

@@ -1,39 +1,31 @@
 import * as React from 'react';
-import NewsList from '../../components/NewsList/index';
-import NewTag from '../../components/NewTag/index';
-import Loader from '../../components/Loader/index';
+import NewsList from '../../../../../../components/NewsList/index';
 import { connect } from 'react-redux';
-
-import {
-  Dropdown,
-  Icon,
-  Menu,
-  Switch
-  } from 'antd';
+import { Loader } from '../../../../../../components/Loader';
 import './index.less';
 
-export class DailyNews extends React.Component<any, any> {
+export class TagCloud extends React.Component<any, any> {
   constructor (props: any) {
     super(props)
-    this.dropSelect = this.dropSelect.bind(this)
-    this.toggleLanguage = this.toggleLanguage.bind(this)
+    this.selectTag = this.selectTag.bind(this)
     this.state = {
-      allData: '',
-      currentDailyData: '',
-      tagList:'',
-      currentDataTime: '过去24小时',
-      currentLanguage: 'cn',
-      loading: true
+      loading: false,
+      currentDailyData:''
     }
   }
+  
+  componentDidMount() {
+  }
 
-  getTagList() {
-    this.setState({
-      tagList: this.props.tagList
-    })
+  componentWillReceiveProps(nextProps: any) {
   }
   
-  getDailyData() {
+  selectTag = (item: any) =>{
+    this.searchTagData(item)
+  }
+
+  searchTagData =(item: string) => {
+    // console.log('searchTagData',item)
     let data = {
       "total":20, // 一共多少页
       "newsList":[
@@ -358,123 +350,37 @@ export class DailyNews extends React.Component<any, any> {
          }
       ]
     }
-    this.setState({
-      allData: data,
-    },()=>{
-      this.changeLanguage('cn')
-      setTimeout(()=>{this.setState({loading:false})},3000)
-    })
-  }
-  /** 
-   * @param {string} type 
-   * @memberof DailyNews
-   * 筛选逻辑是根据返回单条数据中enTitle是否存在，因为enTitle是英文咨询的标题，而且英文咨询还存在
-   * 翻译后的中文咨询
-  */
-  changeLanguage(type: string){
-    let temp
-    // 浅拷贝赋值
-    let { newsList } = this.state.allData
-    if(type === 'cn'){
-      temp = newsList
-        .filter((item: any, key: any) => {
-          return item.enTitle.length === 0
-      })
-    }else{
-      temp = newsList
-      .filter((item: any, key: any) => {
-        return item.enTitle.length !== 0
-      })
-    }
-    newsList = temp
-    
-    this.setState({
-      currentDailyData: newsList,
-    })
-    
-  }
-
-  componentDidMount() {
-    this.getTagList()
-    this.getDailyData()
-  }
-
-  componentWillReceiveProps(nextProps: any) {
-
-  }
-
-  dropSelect = (key: any) => {
-    console.log(key)
-    switch(key.key){
-      case '1':
-        return this.setState({
-          currentDataTime:'过去24小时'
-        })
-      case '2':
-        return this.setState({
-          currentDataTime:'过去一周'
-        })
-      case '3':
-        return this.setState({
-          currentDataTime:'过去一月'
-        })
-      default:
-      return
-    }
-  }
-
-  toggleLanguage() {
-    if(this.state.currentLanguage === 'cn'){
+    this.setState({loading:true})
+    setTimeout(()=>{
       this.setState({
-        currentLanguage: 'en'
-      },()=>{
-        this.changeLanguage('en')
-        console.log('切换英文咨询')
+        loading:false,
+        currentDailyData: data.newsList
       })
-    }else{
-      this.setState({
-        currentLanguage: 'cn'
-      },()=>{
-        this.changeLanguage('cn')
-        console.log('切换中文咨询')
-      })
-    }
-  }
+    },2000)
+  } 
 
   render () {
-
-    const menu = (
-      <Menu onClick ={this.dropSelect}>
-        <Menu.Item key="1">过去24小时</Menu.Item>
-        <Menu.Item key="2">过去一周</Menu.Item>
-        <Menu.Item key="3">过去一月</Menu.Item>
-      </Menu>
-    );
-    
     return(
-      <div id="DailyNews">
-        <div className="dailyThead">
-          <div className="dropdown">
-            <Dropdown overlay={menu}>
-              <a className="ant-dropdown-link" href="#">
-                {this.state.currentDataTime} <Icon type="down" />
-              </a>
-            </Dropdown>
-            <NewTag></NewTag>
+      <div id="TagCloud" > 
+        <div className = "container" >
+          <div className = "tags" > 
+            <div className="panel">
+            <h3>标签云</h3>
+            {
+              this.props.tagList.map((item: any, key: any) => {
+                return <a href="#" key={key} onClick ={() => this.selectTag(item)}>
+                        <span className="tag-rounded--inverse">{item}</span>
+                      </a>
+              })
+            }
+            </div> 
           </div>
-          <div className="switch">
-           
-            <Switch checkedChildren="切换中文咨询" unCheckedChildren="切换英文咨询" onChange={this.toggleLanguage}/>
-          </div>
-        </div>
-        <hr></hr>
+          <Loader show={this.state.loading} ></Loader>
+          <NewsList show={!this.state.loading} data={this.state.currentDailyData} tagList={this.props.tagList}></NewsList>
 
-
-        <Loader show={this.state.loading} ></Loader>
-        <NewsList show={!this.state.loading} data={this.state.currentDailyData} tagList={this.state.tagList}>
-         
-        </NewsList>
+        </div> 
       </div>
+
     )
   }
 }
@@ -483,6 +389,7 @@ const mapStateToProps = (state: any) => ({
   tagList: state.info.tagList
 })
 
-DailyNews = connect(mapStateToProps)(DailyNews);
+TagCloud = connect(mapStateToProps)(TagCloud)
 
-export default DailyNews;
+export default TagCloud
+

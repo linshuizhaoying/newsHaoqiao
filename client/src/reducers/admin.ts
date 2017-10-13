@@ -1,16 +1,18 @@
-import { FRAME } from '../constants/admin';
+import { CHECKSOURCE } from '../constants/admin';
 
 const initialState = {
-  frame: ''
+  frame: '',
+  currentSourceData:'',
+
 }
 
 const admin = (state = initialState, action: any) => {
   // console.log(action)
   switch (action.type) {
-    case FRAME:
+    case CHECKSOURCE:
       return {
         ...state,
-        frame:action.data.data
+        currentSourceData:action.data.data
       }
     default:
       return state

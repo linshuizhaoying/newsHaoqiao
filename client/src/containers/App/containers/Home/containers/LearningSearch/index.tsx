@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Loader from '../../components/Loader/index';
-import NewsList from '../../components/NewsList/index';
+import Loader from '../../../../../../components/Loader/index';
+import NewsList from '../../../../../../components/NewsList/index';
 import {
   AutoComplete,
   Button,

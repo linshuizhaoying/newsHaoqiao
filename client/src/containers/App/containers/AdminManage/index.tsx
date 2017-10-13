@@ -1,17 +1,17 @@
 import * as React from 'react';
-import AdminNewsCheck from '../../components/AdminNewsCheck/index';
-import AdminNewsList from '../../components/AdminNewsList/index';
-import AdminNewsTool from '../../components/AdminNewsTool';
-import AdminTag from '../../components/AdminTag/index';
-import AdminWeekList from '../../components/AdminWeekList';
-import AdminWeekTool from '../../components/AdminWeekTool';
-import AdminSearchList from '../../components/AdminSearchList';
-import AdminSearchTool from '../../components/AdminSearchTool';
-import NotificationUtils from '../../util/notification';
+import AdminNewsCheck from './containers/AdminNewsCheck/index';
+import AdminNewsList from './containers/AdminNewsList/index';
+import AdminNewsTool from './containers/AdminNewsTool';
+import AdminTag from './containers/AdminTag/index';
+import AdminWeekList from './containers/AdminWeekList';
+import AdminWeekTool from './containers/AdminWeekTool';
+import AdminSearchList from './containers/AdminSearchList';
+import AdminSearchTool from './containers/AdminSearchTool';
+import NotificationUtils from '../../../../util/notification';
 import { connect } from 'react-redux';
 import { Icon, Layout, Menu } from 'antd';
 import { Link, Route, Switch } from 'react-router-dom';
-import { Logout } from '../../actions';
+import { Logout } from '../../../../actions';
 import './index.less';
 const { Header, Sider, Content, Footer } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -29,6 +29,7 @@ export class AdminManage extends React.Component<any, any> {
     });
   }
   componentDidMount() {
+    
   }
 
   componentWillReceiveProps(nextProps: any) {
@@ -82,7 +83,7 @@ export class AdminManage extends React.Component<any, any> {
                       </Link>
                     </Menu.Item>
                     <Menu.Item key="4">
-                      <Link to='/xyt/newsTool/empty'>
+                      <Link to='/xyt/newsTool'>
                         抓取辅助
                       </Link>
                     </Menu.Item>
@@ -133,7 +134,7 @@ export class AdminManage extends React.Component<any, any> {
                   <Switch>
                     <Route path="/xyt/tag" component={AdminTag}/> 
                     <Route path="/xyt/newsList" component={AdminNewsList}/> 
-                    <Route path="/xyt/newsTool/:link" component={AdminNewsTool}/> 
+                    <Route path="/xyt/newsTool" component={AdminNewsTool}/> 
                     <Route path="/xyt/newsCheck" component={AdminNewsCheck}/>
                     <Route path="/xyt/weekList" component={AdminWeekList}/> 
                     <Route path="/xyt/weekTool" component={AdminWeekTool}/> 

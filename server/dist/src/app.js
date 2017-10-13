@@ -20,7 +20,11 @@ console.log('start');
 // sessions
 // mongodb
 const mongoose = require('mongoose');
-mongoose.connect(config_1.config.mongo.url, { useMongoClient: true });
+mongoose.Promise = global.Promise;
+mongoose.connect(config_1.config.mongo.url, { useMongoClient: true }).catch((err) => {
+    console.error('App starting error:', err.stack);
+    process.exit(1);
+});
 app.use(bodyParser());
 routes_1.Router(app);
 const port = config_1.config.app.port;

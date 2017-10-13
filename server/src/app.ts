@@ -23,7 +23,11 @@ console.log('start')
 // mongodb
 
 const mongoose = require('mongoose');
-mongoose.connect(config.mongo.url, { useMongoClient: true })
+mongoose.Promise = global.Promise;
+mongoose.connect(config.mongo.url, { useMongoClient: true }).catch((err: any) => { // if error we will be here
+  console.error('App starting error:', err.stack);
+  process.exit(1);
+});
 
 app.use(bodyParser())
 

@@ -6,10 +6,11 @@ import {
   Input,
   Select
   } from 'antd';
-import { UrlRegEx } from '../../util/tools';
+import { UrlRegEx } from '../../../../../../util/tools';
+import { connect } from 'react-redux';
 import './index.less';
 import { FRAME_API, ONLINETEST_API } from 
-'../../service/api/index';
+'../../../../../../service/api/index';
 
 const { TextArea } = Input;
 const InputGroup = Input.Group;
@@ -37,11 +38,7 @@ export class AdminNewsTool extends React.Component<any, any> {
       result:'',
     }
   }
-  componentDidMount() {
-    console.log(this.props.match)
-    this.setState({
-      link:this.props.match.params.link !== 'empty' ? decodeURIComponent(this.props.match.params.link): ''
-    })
+  componentWillMount(){
     window.addEventListener('message',(e) => {
       if(e.data){
         this.setState({
@@ -50,6 +47,16 @@ export class AdminNewsTool extends React.Component<any, any> {
         })
       }
     },false);
+  }
+  componentDidMount() {
+    console.log(this.props.currentSourceData)
+    this.setState({
+      link: this.props.currentSourceData.currentLink ? decodeURIComponent(this.props.currentSourceData.currentLink) : '',
+      lang: this.props.currentSourceData.currentLang ? this.props.currentSourceData.currentLang : 'cn',
+      sourceTitle: this.props.currentSourceData.currentTitle ?this.props.currentSourceData.currentTitle: '',
+      type: this.props.currentSourceData.currentType ?this.props.currentSourceData.currentType: 'spider',
+    })
+   
     
   }
 
@@ -145,7 +152,7 @@ export class AdminNewsTool extends React.Component<any, any> {
           <div style={{ marginBottom: 16 }}>
              <InputGroup compact>
                <Input style={{ width: 80,  pointerEvents: 'none', }} value="语言选择:" onChange={()=>{}}/>
-              <Select defaultValue="cn" onChange={this.changeLang}>
+              <Select defaultValue={this.state.lang} onChange={this.changeLang}>
                 <Option value="cn">cn</Option>
                 <Option value="en">en</Option>
               </Select>
@@ -199,5 +206,11 @@ export class AdminNewsTool extends React.Component<any, any> {
   }
 }
 
+const mapStateToProps = (state: any) => ({
+  currentSourceData: state.admin.currentSourceData,
+
+})
+
+AdminNewsTool = connect(mapStateToProps)(AdminNewsTool);
 
 export default AdminNewsTool;
