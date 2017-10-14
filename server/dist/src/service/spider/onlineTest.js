@@ -27,13 +27,22 @@ const translate = (str) => __awaiter(this, void 0, void 0, function* () {
 exports.onlineTest = (ctx) => __awaiter(this, void 0, void 0, function* () {
     let _body = '';
     const result = [];
+    let node = '';
+    console.log(ctx.request.body);
     const { source, parent, child, sourceLink, lang } = ctx.request.body;
+    // 如果有代码片段传过来,说明是测试存在的代码源
+    if (ctx.request.body.code) {
+        node = ctx.request.body.code;
+    }
+    else {
+        node = parent + ' ' + child;
+    }
+    console.log(node);
     yield axios_1.default({ method: 'get', url: decodeURIComponent(sourceLink), responseType: 'text' })
         .then(function (response) {
         _body = response.data;
     });
     let strArr = '';
-    const node = parent + ' ' + child;
     const $ = cheerio.load(_body); // 获取文本
     $(node).map((index, element) => __awaiter(this, void 0, void 0, function* () {
         const item = {

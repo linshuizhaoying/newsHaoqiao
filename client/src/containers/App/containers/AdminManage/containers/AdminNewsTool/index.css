@@ -36,3 +36,9 @@
 #AdminNewsTool .result {
   margin-bottom: 20px;
 }
+#AdminNewsTool .hide {
+  display: none;
+}
+#AdminNewsTool .show {
+  display: initial;
+}

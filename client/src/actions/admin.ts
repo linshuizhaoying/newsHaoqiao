@@ -1,9 +1,40 @@
-import { CHECKSOURCE } from '../constants/admin';
+import axios from '../util/axios'
+import { CHECKSOURCE, ADDSOURCE, REMOVESOURCE, UPDATESOURCE, ALLSOURCES } from '../constants/admin';
+import { getToken } from '../util/store';
+import { ADDSOURCE_API, ALLSOURCES_API, REMOVESOURCE_API, UPDATESOURCE_API } from '../service/api/index';
+interface SourceData  {
+  sourceTitle: String,
+  url: String, 
+  type: String, // spider rss email
+  code: String,
+  lang: String,
+}
 
 const checkSource = (data: any) => ({
   type: CHECKSOURCE,
   data: data,
 })
+
+const addSource = (data: any) => ({
+  type: ADDSOURCE,
+  data: data,
+})
+
+const allSource = (data: any) => ({
+  type: ALLSOURCES,
+  data: data,
+})
+
+const removeSource = (data: any) => ({
+  type: REMOVESOURCE,
+  data: data,
+})
+
+const updateSource = (data: any) => ({
+  type: UPDATESOURCE,
+  data: data,
+})
+
 
 
 export function checkLocalSource (data: any) {
@@ -23,5 +54,48 @@ export function checkLocalSource (data: any) {
     }
   }
 
-  return (dispatch: any) => dispatch(checkSource(arr))
+  return (dispatch: any) => {
+    dispatch(checkSource(arr))
+    return info
+  }
+}
+
+export function addSourceRemote (source: SourceData){
+  // 写入权限验证
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
+  return (dispatch: any) => axios.post(ADDSOURCE_API, source)
+  .then((info: any) => {
+    dispatch(addSource(info))
+    return info
+  })
+}
+
+export function allSourceRemote (){
+  // 写入权限验证
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
+  return (dispatch: any) => axios.get(ALLSOURCES_API)
+  .then((info: any) => {
+    dispatch(allSource(info))
+    return info
+  })
+}
+
+export function removeSourceRemote (id: string){
+  // 写入权限验证
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
+  return (dispatch: any) => axios.post(REMOVESOURCE_API, {id})
+  .then((info: any) => {
+    dispatch(removeSource(info))
+    return info
+  })
+}
+
+export function updateSourceRemote (id: string, source: SourceData){
+  // 写入权限验证
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
+  return (dispatch: any) => axios.post(UPDATESOURCE_API, {id, source})
+  .then((info: any) => {
+    dispatch(updateSource(info))
+    return info
+  })
 }

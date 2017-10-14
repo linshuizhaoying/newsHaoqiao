@@ -13,12 +13,16 @@ import { Icon, Layout, Menu } from 'antd';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Logout } from '../../../../actions';
 import './index.less';
+import { allSourceRemote, checkLocalSource } from '../../../../actions/admin';
 const { Header, Sider, Content, Footer } = Layout;
 const SubMenu = Menu.SubMenu;
+
 export class AdminManage extends React.Component<any, any> {
   constructor (props: any) {
     super(props)
     this.logOut = this.logOut.bind(this)
+    this.newsList = this.newsList.bind(this)
+    this.newsTool = this.newsTool.bind(this)
     this.state = {
       collapsed: false,
     };
@@ -35,6 +39,25 @@ export class AdminManage extends React.Component<any, any> {
   componentWillReceiveProps(nextProps: any) {
   }
 
+  newsList () {
+    const { dispatch } = this.props;
+    dispatch(allSourceRemote())
+  }
+
+  newsTool () {
+    console.log('newsTool')
+    const info ={
+      currentId: '',
+      currentLink: '',
+      currentTitle: '',
+      currentLang:  '',
+      currentType: '',
+      currentCode: '',
+    }
+    const { dispatch } = this.props;
+    dispatch(checkLocalSource({}))
+  }
+
   logOut = (e: any) => {
     if(e.key === 'logout'){
       const { dispatch, history } = this.props;
@@ -42,7 +65,6 @@ export class AdminManage extends React.Component<any, any> {
       NotificationUtils.notificationSuccess("退出成功!", "退出成功!", 2);    
       history.push('/login')
     }
-
   }
 
   render () {
@@ -78,12 +100,12 @@ export class AdminManage extends React.Component<any, any> {
                       </Link>
                     </Menu.Item>
                     <Menu.Item key="3">
-                      <Link to='/xyt/newsList'>
+                      <Link to='/xyt/newsList' onClick={this.newsList}>
                         列表管理
                       </Link>
                     </Menu.Item>
                     <Menu.Item key="4">
-                      <Link to='/xyt/newsTool'>
+                      <Link to='/xyt/newsTool' onClick={this.newsTool}>
                         抓取辅助
                       </Link>
                     </Menu.Item>

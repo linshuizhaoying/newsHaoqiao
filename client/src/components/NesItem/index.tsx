@@ -113,7 +113,7 @@ export class NewsItem extends React.Component<any, any> {
              <a target="_blank" href={'http://' + this.props.data.link}>{this.props.data.title}</a>
           </div>
           <div className="source">
-             (<a  target="_blank" href={'http://' + this.props.data.sourceLink}>{this.props.data.source}</a>)
+             (<a  target="_blank" href={'http://' + this.props.data.sourceLink}>{this.props.data.sourceTitle}</a>)
           </div>
         </div>
         

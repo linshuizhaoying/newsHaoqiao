@@ -21,14 +21,25 @@ const translate = async (str: string) => {
 export const onlineTest = async(ctx: any) => {
   let _body = ''
   const result: any[] = []
+  let node = ''
+  console.log(ctx.request.body)
   const {source, parent, child, sourceLink, lang} = ctx.request.body;
+  // 如果有代码片段传过来,说明是测试存在的代码源
+
+  if (ctx.request.body.code) {
+    node = ctx.request.body.code
+  } else {
+    node = parent + ' ' + child
+  }
+  console.log(node)
+
   await axios({method: 'get', url: decodeURIComponent(sourceLink), responseType: 'text'})
   .then(function (response) {
     _body = response.data
   })
 
   let strArr = ''
-  const node = parent + ' ' + child
+
   const $ = cheerio.load(_body); // 获取文本
   $(node).map(async (index: any, element: any) => {
     const item = {

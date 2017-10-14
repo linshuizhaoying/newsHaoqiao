@@ -8,9 +8,17 @@ import { config } from '../config'
 const router = new Irouter({prefix: config.app.baseApi})
 
 export const Router = (app: any) => {
+  const { reg,
+          login,
+          userInfo,
+          requestFrame,
+          onlineTest,
+          addSource,
+          allSources,
+          removeSource,
+          updateSource
+        } = Service
 
-  // 用户 注册 登录
-  const { reg, login, userInfo, requestFrame, onlineTest } = Service
   router.post('/reg', Service.reg)
         .post('/login', Service.login)
         .get('/userInfo', tokenPermission, Service.userInfo)
@@ -19,6 +27,11 @@ export const Router = (app: any) => {
         // 管理员操作
         .get('/requestFrame/:link', Service.requestFrame)
         .post('/onlineTest', Service.onlineTest)
+        .post('/addSource', tokenPermission, addSource)
+        .get('/allSources', tokenPermission, allSources)
+        .post('/removeSource', tokenPermission, removeSource)
+        .post('/updateSource', tokenPermission, updateSource)
+
   router.all('/*',  async (ctx, next) => {
     ctx.body = '404'
   })

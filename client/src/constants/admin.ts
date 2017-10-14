@@ -1,2 +1,6 @@
 export const FRAME = 'FRAME'
 export const CHECKSOURCE = 'CHECKSOURCE'
+export const ADDSOURCE = 'ADDSOURCE'
+export const REMOVESOURCE = 'REMOVESOURCE'
+export const ALLSOURCES = 'ALLSOURCES'
+export const UPDATESOURCE = 'UPDATESOURCE'

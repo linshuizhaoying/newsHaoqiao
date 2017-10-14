@@ -1,3 +1,4 @@
+
 const User = require('../models/user.js');
 interface RegUser  {
   username: string,
@@ -50,8 +51,6 @@ export const AddRegUser = async(user: RegUser) => {
     })
     return result
   }
-
-
 }
 
 export const LoginUser = async(user: LoginUser) => {

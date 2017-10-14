@@ -42,7 +42,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'[译] Web 真相：cSS 不是真正的编程',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'开发者头条',
+          sourceTitle:'开发者头条',
           sourceLink:'toutiao.io',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -58,7 +58,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'typescript 源码阅读（上）',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'开发者头条',
+          sourceTitle:'开发者头条',
           sourceLink:'toutiao.io',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -74,7 +74,7 @@ export class DailyNews extends React.Component<any, any> {
          title:'javaScript 闭包',
          enTitle:'',
          link:'http://toutiao.io//k/g8bv5e',
-         source:'开发者头条',
+         sourceTitle:'开发者头条',
          sourceLink:'toutiao.io',
          createDate:'2017-10-02', // YY-MM-DD-HH
          type:'spider',
@@ -90,7 +90,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'ES6系列文章 Promise',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'开发者头条',
+          sourceTitle:'开发者头条',
           sourceLink:'toutiao.io',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -106,7 +106,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'setTimeout与setInterval的区别和nodejs中的差异',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'segmentfault',
+          sourceTitle:'segmentfault',
           sourceLink:'segmentfault.com',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -122,7 +122,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'2017年react面试复习资料整理',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'segmentfault',
+          sourceTitle:'segmentfault',
           sourceLink:'segmentfault.com',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -138,7 +138,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'vue 将echarts封装为组件一键使用',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'segmentfault',
+          sourceTitle:'segmentfault',
           sourceLink:'segmentfault.com',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -153,7 +153,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'[译] Web 真相：cSS 不是真正的编程',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'开发者头条',
+          sourceTitle:'开发者头条',
           sourceLink:'toutiao.io',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -169,7 +169,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'typescript 源码阅读（上）',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'开发者头条',
+          sourceTitle:'开发者头条',
           sourceLink:'toutiao.io',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -185,7 +185,7 @@ export class DailyNews extends React.Component<any, any> {
          title:'javaScript 闭包',
          enTitle:'',
          link:'http://toutiao.io//k/g8bv5e',
-         source:'开发者头条',
+         sourceTitle:'开发者头条',
          sourceLink:'toutiao.io',
          createDate:'2017-10-02', // YY-MM-DD-HH
          type:'spider',
@@ -201,7 +201,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'ES6系列文章 Promise',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'开发者头条',
+          sourceTitle:'开发者头条',
           sourceLink:'toutiao.io',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -217,7 +217,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'setTimeout与setInterval的区别和nodejs中的差异',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'segmentfault',
+          sourceTitle:'segmentfault',
           sourceLink:'segmentfault.com',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -233,7 +233,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'2017年react面试复习资料整理',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'segmentfault',
+          sourceTitle:'segmentfault',
           sourceLink:'segmentfault.com',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -249,7 +249,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'vue 将echarts封装为组件一键使用',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'segmentfault',
+          sourceTitle:'segmentfault',
           sourceLink:'segmentfault.com',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -265,7 +265,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'ES6系列文章 Promise',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'开发者头条',
+          sourceTitle:'开发者头条',
           sourceLink:'toutiao.io',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -281,7 +281,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'setTimeout与setInterval的区别和nodejs中的差异',
           enTitle:'cSS font-variant tester',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'segmentfault',
+          sourceTitle:'segmentfault',
           sourceLink:'segmentfault.com',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -297,7 +297,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'2017年react面试复习资料整理',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'segmentfault',
+          sourceTitle:'segmentfault',
           sourceLink:'segmentfault.com',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -313,7 +313,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'vue 将echarts封装为组件一键使用',
           enTitle:'',
           link:'http://toutiao.io//k/g8bv5e',
-          source:'segmentfault',
+          sourceTitle:'segmentfault',
           sourceLink:'segmentfault.com',
           createDate:'2017-10-02', // YY-MM-DD-HH
           type:'spider',
@@ -329,7 +329,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'xxxxx',
           enTitle:'cSS font-display: The Future of Font Rendering on the Web',
           link:'https://www.sitepoint.com/css-font-display-future-font-rendering-web/',
-          source:'sitepoint',
+          sourceTitle:'sitepoint',
           sourceLink:'sitepoint.com',
           createDate:'2017-10-03', // YY-MM-DD-HH
           type:'spider',
@@ -345,7 +345,7 @@ export class DailyNews extends React.Component<any, any> {
           title:'xxxxx',
           enTitle:'20 principles for Craft CMS',
           link:'https://www.sitepoint.com/css-font-display-future-font-rendering-web/',
-          source:'sitepoint',
+          sourceTitle:'sitepoint',
           sourceLink:'sitepoint.com',
           createDate:'2017-10-03', // YY-MM-DD-HH
           type:'spider',

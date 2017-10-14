@@ -1,9 +1,11 @@
-
 import * as React from 'react';
-import { Table, Input, Icon, Button, Popconfirm } from 'antd';
-import { checkLocalSource } from '../../../../../../actions/admin';
+import NotificationUtils from '../../../../../../util/notification';
+import { checkLocalSource, removeSourceRemote } from '../../../../../../actions/admin';
+import { Button, Popconfirm, Table } from 'antd';
 import { connect } from 'react-redux';
 import './index.less';
+
+
 
 
 export class AdminNewsList extends React.Component<any, any> {
@@ -16,56 +18,44 @@ export class AdminNewsList extends React.Component<any, any> {
   }
 
   componentDidMount(){
-    let data = [{
-      key: '001',
-      title: '好巧前端',
-      url: 'http://haoqiao.me',
-      lang: 'cn',
-      type: 'spider'
-    },{
-      key: '002',
-      title: '好巧前端',
-      url: 'http://haoqiao.me',
-      lang: 'cn',
-      type: 'spider'
-    },{
-      key: '003',
-      title: '好巧前端',
-      url: 'http://haoqiao.me',
-      lang: 'en',
-      type: 'spider'
-    },{
-      key: '004',
-      title: '好巧前端',
-      url: 'http://haoqiao.me',
-      lang: 'en',
-      type: 'spider'
+
+  }
+  componentWillReceiveProps(nextProps: any) {
+    if(nextProps && nextProps.currentSourceList && nextProps.currentSourceList.data.length > 0){
+      const arr = nextProps.currentSourceList.data.map((item: any, index: any) =>{
+        item.key = item._id
+        return item
+      })
+      this.setState({
+        dataSource: arr
+      })
+      console.log(nextProps)
     }
-  ]
-  this.setState({
-    dataSource: data
-  })
   }
 
-  onChangeStatus = (key: any) => {
+  deleteSource = (id: any) => {
     const dataSource = [...this.state.dataSource];
     this.setState({
       dataSource: dataSource.filter(item => {
-        return item.key !== key
+        return item._id !== id
       })
     });
+    const { dispatch } = this.props;
+    dispatch(removeSourceRemote(id))
+    NotificationUtils.notificationSuccess('删除成功!','删除成功!',1)
   }
+
   handleAdd = () => {
     const { history } = this.props;
     history.push('/xyt/newsTool/empty')
   }
 
-  checkSource = (key: string, url: string, title: string, lang:string, type:string,code:string ) =>{
+  checkSource = (id: string, url: string, sourceTitle: string, lang:string, type:string,code:string ) =>{
     const { dispatch, history } = this.props;
     const info ={
-      currentId: key,
+      currentId: id,
       currentLink: url,
-      currentTitle: title,
+      currentTitle: sourceTitle,
       currentLang:  lang,
       currentType: type,
       currentCode: code,
@@ -81,7 +71,7 @@ export class AdminNewsList extends React.Component<any, any> {
     const columns = 
     [{
       title: '名称',
-      dataIndex: 'title',
+      dataIndex: 'sourceTitle',
       width: '30%',
      }, {
       title: 'Url',
@@ -100,11 +90,11 @@ export class AdminNewsList extends React.Component<any, any> {
           this.state.dataSource.length > 0 ?
           (
             <div>
-                <Button type="primary" onClick={()=>{this.checkSource(record.key,encodeURIComponent(record.url),record.title,record.lang,record.type,record.code)}}>
+                <Button type="primary" onClick={()=>{this.checkSource(record._id,encodeURIComponent(record.url),record.sourceTitle,record.lang,record.type,record.code)}}>
                   验证
                 </Button>
     
-              <Popconfirm title="确定要删除么?" onConfirm={() => this.onChangeStatus(record.key)}>
+              <Popconfirm title="确定要删除么?" onConfirm={() => this.deleteSource(record._id)}>
                 <Button type="danger">删除</Button>
               </Popconfirm>
             </div>
@@ -122,7 +112,7 @@ export class AdminNewsList extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any) => ({
-  currentSourceData: state.admin.currentSourceData,
+  currentSourceList: state.admin.currentSourceList,
 
 })
 
