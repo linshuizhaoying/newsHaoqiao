@@ -30,32 +30,24 @@ const error = () => {
         }
     };
 };
-exports.addSource = (ctx) => __awaiter(this, void 0, void 0, function* () {
+exports.addTag = (ctx) => __awaiter(this, void 0, void 0, function* () {
     console.log('addTag');
     console.log(ctx.request.body);
-    const { sourceTitle, url, lang, type, code } = ctx.request.body;
-    yield index_1.AddSource({ sourceTitle, url, lang, type, code });
+    const { tagTitle, status } = ctx.request.body;
+    yield index_1.AddTag({ tagTitle, status });
     return ctx.body = success('');
 });
-exports.allSources = (ctx) => __awaiter(this, void 0, void 0, function* () {
-    console.log('allSource');
+exports.allTags = (ctx) => __awaiter(this, void 0, void 0, function* () {
+    console.log('allTags');
     console.log(ctx.request.body);
-    const result = yield index_1.AllSources();
-    console.log(result);
+    const result = yield index_1.AllTags();
     return ctx.body = success(result);
 });
-exports.removeSource = (ctx) => __awaiter(this, void 0, void 0, function* () {
-    console.log('removeSource');
+exports.updateTag = (ctx) => __awaiter(this, void 0, void 0, function* () {
+    console.log('updateTag');
     console.log(ctx.request.body);
     const { id } = ctx.request.body;
-    yield index_1.RemoveSource(id);
-    return ctx.body = success('');
+    const { tagTitle, status } = ctx.request.body;
+    return ctx.body = yield index_1.UpdateTag(id, { tagTitle, status });
 });
-exports.updateSource = (ctx) => __awaiter(this, void 0, void 0, function* () {
-    console.log('updateSource');
-    console.log(ctx.request.body);
-    const { id } = ctx.request.body;
-    const { sourceTitle, url, lang, type, code } = ctx.request.body.source;
-    return ctx.body = yield index_1.UpdateSource(id, { sourceTitle, url, lang, type, code });
-});
-//# sourceMappingURL=sourceApi.js.map
+//# sourceMappingURL=tagApi.js.map

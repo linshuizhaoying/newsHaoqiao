@@ -13,7 +13,7 @@ import { Icon, Layout, Menu } from 'antd';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Logout } from '../../../../actions';
 import './index.less';
-import { allSourceRemote, checkLocalSource } from '../../../../actions/admin';
+import { allSourceRemote, checkLocalSource, allTagRemote } from '../../../../actions/admin';
 const { Header, Sider, Content, Footer } = Layout;
 const SubMenu = Menu.SubMenu;
 
@@ -23,6 +23,7 @@ export class AdminManage extends React.Component<any, any> {
     this.logOut = this.logOut.bind(this)
     this.newsList = this.newsList.bind(this)
     this.newsTool = this.newsTool.bind(this)
+    this.tagList =  this.tagList.bind(this)
     this.state = {
       collapsed: false,
     };
@@ -43,17 +44,14 @@ export class AdminManage extends React.Component<any, any> {
     const { dispatch } = this.props;
     dispatch(allSourceRemote())
   }
+  tagList () {
+    const { dispatch } = this.props;
+    dispatch(allTagRemote())
+  }
+
 
   newsTool () {
     console.log('newsTool')
-    const info ={
-      currentId: '',
-      currentLink: '',
-      currentTitle: '',
-      currentLang:  '',
-      currentType: '',
-      currentCode: '',
-    }
     const { dispatch } = this.props;
     dispatch(checkLocalSource({}))
   }
@@ -83,7 +81,7 @@ export class AdminManage extends React.Component<any, any> {
                 <Menu  mode="inline" defaultSelectedKeys={['1']}>
                  
                     <Menu.Item key="1">
-                      <Link to='/xyt/tag'>
+                      <Link to='/xyt/tag' onClick={this.tagList}>
                         <Icon type="tag" />
                           <span>
                             标签管理
@@ -176,7 +174,7 @@ export class AdminManage extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   isLogin: state.user.isLogin,
   userName: state.user.userName,
-  tagList: state.info.tagList
+  tagList: state.admin.tagList
 })
 
 AdminManage = connect(mapStateToProps)(AdminManage);

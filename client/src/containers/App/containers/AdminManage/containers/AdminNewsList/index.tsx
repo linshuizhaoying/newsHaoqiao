@@ -21,6 +21,7 @@ export class AdminNewsList extends React.Component<any, any> {
 
   }
   componentWillReceiveProps(nextProps: any) {
+    console.log()
     if(nextProps && nextProps.currentSourceList && nextProps.currentSourceList.data.length > 0){
       const arr = nextProps.currentSourceList.data.map((item: any, index: any) =>{
         item.key = item._id
@@ -47,7 +48,7 @@ export class AdminNewsList extends React.Component<any, any> {
 
   handleAdd = () => {
     const { history } = this.props;
-    history.push('/xyt/newsTool/empty')
+    history.push('/xyt/newsTool')
   }
 
   checkSource = (id: string, url: string, sourceTitle: string, lang:string, type:string,code:string ) =>{

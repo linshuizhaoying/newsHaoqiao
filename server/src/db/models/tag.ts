@@ -1,8 +1,8 @@
 import mongoose = require('mongoose');
 
 const TagSchema = new mongoose.Schema({
-  TagTitle: { type: String },
-  status: { type: String },
+  tagTitle: { type: String },
+  status: { type: String }, // 活跃, 停用
 });
 
 module.exports = mongoose.model('Tag', TagSchema);

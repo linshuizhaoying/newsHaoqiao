@@ -1,13 +1,35 @@
+
 import axios from '../util/axios'
-import { CHECKSOURCE, ADDSOURCE, REMOVESOURCE, UPDATESOURCE, ALLSOURCES } from '../constants/admin';
+import { CHECKSOURCE, 
+         ADDSOURCE, 
+         REMOVESOURCE, 
+         UPDATESOURCE, 
+         ALLSOURCES,
+         ALLTAGS,
+         ADDTAG,
+         UPDATETAG
+        } from '../constants/admin';
 import { getToken } from '../util/store';
-import { ADDSOURCE_API, ALLSOURCES_API, REMOVESOURCE_API, UPDATESOURCE_API } from '../service/api/index';
+import { ADDTAG, UPDATETAG } from '../constants/admin';
+import { ADDSOURCE_API,
+         ALLSOURCES_API, 
+         REMOVESOURCE_API, 
+         UPDATESOURCE_API,
+         ALLTAGS_API,
+         ADDTAG_API,
+         UPDATETAG_API
+         } from '../service/api/index';
 interface SourceData  {
   sourceTitle: String,
   url: String, 
   type: String, // spider rss email
   code: String,
   lang: String,
+}
+
+interface TagData  {
+  tagTitle: string,
+  status: string
 }
 
 const checkSource = (data: any) => ({
@@ -35,6 +57,20 @@ const updateSource = (data: any) => ({
   data: data,
 })
 
+const addTag = (data: any) => ({
+  type: ADDTAG,
+  data: data,
+})
+
+const allTags = (data: any) => ({
+  type: ALLTAGS,
+  data: data,
+})
+
+const updateTag = (data: any) => ({
+  type: UPDATETAG,
+  data: data,
+})
 
 
 export function checkLocalSource (data: any) {
@@ -96,6 +132,38 @@ export function updateSourceRemote (id: string, source: SourceData){
   return (dispatch: any) => axios.post(UPDATESOURCE_API, {id, source})
   .then((info: any) => {
     dispatch(updateSource(info))
+    return info
+  })
+}
+
+export function allTagRemote (){
+  // 写入权限验证
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
+  return (dispatch: any) => axios.get(ALLTAGS_API)
+  .then((info: any) => {
+    dispatch(allTags(info))
+    return info
+  })
+}
+
+export function addTagRemote (tag: TagData){
+  // 写入权限验证
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
+  return (dispatch: any) => axios.post(ADDTAG_API, tag)
+  .then((info: any) => {
+    dispatch(addTag(info))
+    return info
+  })
+}
+
+
+export function updateTagRemote (id: string, tag: TagData){
+  // 写入权限验证
+  const {tagTitle, status} = tag
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
+  return (dispatch: any) => axios.post(UPDATETAG_API, {id, tagTitle, status})
+  .then((info: any) => {
+    dispatch(updateTag(info))
     return info
   })
 }

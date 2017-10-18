@@ -1,11 +1,8 @@
-import { AddSource, AllSources, RemoveSource, UpdateSource } from '../db/controllers/source';
+import { AddSource, AllSources, RemoveSource, UpdateSource } from '../db/controllers/index';
 
-interface SourceData  {
-  sourceTitle: String,
-  url: String,
-  type: String, // spider rss email
-  code: String,
-  lang: String,
+interface ITag  {
+  tagTitle: string,
+  status: string
 }
 
 // 返回正常数据
@@ -31,7 +28,7 @@ const error = () => {
 }
 
 export const addSource = async(ctx: any) => {
-  console.log('addSource')
+  console.log('addTag')
   console.log(ctx.request.body)
   const {sourceTitle, url, lang, type, code} = ctx.request.body;
   await AddSource( {sourceTitle, url, lang, type, code} )
@@ -41,7 +38,6 @@ export const addSource = async(ctx: any) => {
 export const allSources = async(ctx: any) => {
   console.log('allSource')
   console.log(ctx.request.body)
-  const {sourceTitle, url, lang, type, code} = ctx.request.body;
   const result = await AllSources()
   console.log(result)
   return ctx.body = success(result)

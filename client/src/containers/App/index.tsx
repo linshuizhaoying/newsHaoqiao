@@ -99,7 +99,7 @@ export class App extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   isLogin: state.user.isLogin,
   userName: state.user.userName,
-  tagList: state.info.tagList
+  allTags: state.info.allTags
 })
 
 App = connect(mapStateToProps)(App);

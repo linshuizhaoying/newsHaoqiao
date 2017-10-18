@@ -1,7 +1,16 @@
 import * as React from 'react';
-import { Table, Input, Icon, Button, Popconfirm } from 'antd';
-
+import NotificationUtils from '../../../../../../util/notification';
+import { addTagRemote, updateTagRemote, allTagRemote } from '../../../../../../actions/admin';
+import {
+  Button,
+  Icon,
+  Input,
+  Popconfirm,
+  Table
+  } from 'antd';
+import { connect } from 'react-redux';
 import './index.less';
+
 
 class EditableCell extends React.Component {
   state = {
@@ -19,8 +28,6 @@ class EditableCell extends React.Component {
     if (this.props.onChange) {
       this.props.onChange(this.state.value);
     }
-    console.log(this.state.id)
-    console.log(this.state.value)
   }
   edit = () => {
     this.setState({ editable: true });
@@ -63,67 +70,77 @@ export class AdminTag extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      dataSource: [{
-        key: '001',
-        title: '前端',
-        status: '活跃',
-      }, {
-        key: '002',
-        title: 'Javascript',
-        status: '停用',
-      }],
-      count: 2,
+      dataSource: []
     };
   }
-  onCellChange = (key: any, dataIndex: any) => {
-    return (value: any) => {
+
+  componentWillReceiveProps(nextProps: any) {
+    if(nextProps && nextProps.allTags && nextProps.allTags.data.length > 0){
+      const arr = nextProps.allTags.data.map((item: any, index: any) =>{
+        item.key = item._id
+        return item
+      })
+      this.setState({
+        dataSource: arr
+      })
+      console.log(nextProps)
+    }
+  }
+
+  onCellChange = (key: any, dataIndex: any, status: any) => {
+    return (tagTitle: any) => {
+      const { dispatch } = this.props;
+      const data = {
+        tagTitle,
+        status
+      }
+      dispatch(updateTagRemote(key, data))
+      NotificationUtils.notificationSuccess("更改成功!", "更改成功!", 2);   
       const dataSource = [...this.state.dataSource];
       const target = dataSource.find(item => item.key === key);
       if (target) {
-        target[dataIndex] = value;
+        target[dataIndex] = tagTitle;
         this.setState({ dataSource });
       }
     };
   }
-  onChangeStatus = (key: any) => {
+  onChangeStatus = (key: any, tagTitle: string, status: string ) => {
     const dataSource = [...this.state.dataSource];
+    const Tstatus = status == '活跃' ? '停用' : '活跃'
+    const { dispatch } = this.props;
+    const data = {
+      tagTitle,
+      status: Tstatus
+    }
+    dispatch(updateTagRemote(key, data))
+    NotificationUtils.notificationSuccess("更改成功!", "更改成功!", 2); 
+
     this.setState({
       dataSource: dataSource.map(item => {
         if (item.key === key) {
-          item.status =  item.status === '活跃'
-            ? '停用'
-            : '活跃'
+          item.status =  item.status == '活跃' ? '停用' : '活跃'
         }
         return item
       })
-    },()=>{
-      console.log(key)
     });
   }
   handleAdd = () => {
-    const { count, dataSource } = this.state;
-    const newData = {
-      key: '003' + Math.random() * 1000,
-      title: '新标签',
-      status: '活跃',
-    }
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
+    const { dispatch } = this.props;
+    dispatch(addTagRemote({tagTitle:'新标签',status:"活跃"}))
+    dispatch(allTagRemote())
   }
   render() {
     const { dataSource } = this.state;
     const columns = 
     [{
       title: '标签名称',
-      dataIndex: 'title',
+      dataIndex: 'tagTitle',
       width: '30%',
       render: (text: any, record: any) => (
         <EditableCell
-          value={text}
+          value={record.tagTitle}
           id={record.key}
-          onChange={this.onCellChange(record.key, 'name')}
+          onChange={this.onCellChange(record.key, 'name', record.status)}
         />
       ),
      }, {
@@ -136,7 +153,7 @@ export class AdminTag extends React.Component<any, any> {
         return (
           this.state.dataSource.length > 0 ?
           (
-            <Popconfirm title="确定要更改该标签状态么?" onConfirm={() => this.onChangeStatus(record.key)}>
+            <Popconfirm title="确定要更改该标签状态么?" onConfirm={() => this.onChangeStatus(record.key,record.tagTitle,record.status)}>
               <a href="#">更改状态</a>
             </Popconfirm>
           ) : null
@@ -152,5 +169,11 @@ export class AdminTag extends React.Component<any, any> {
   }
 }
 
+
+const mapStateToProps = (state: any) => ({
+  allTags: state.admin.allTags
+})
+
+AdminTag = connect(mapStateToProps)(AdminTag);
 
 export default AdminTag;

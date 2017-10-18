@@ -4,3 +4,7 @@ export const ADDSOURCE = 'ADDSOURCE'
 export const REMOVESOURCE = 'REMOVESOURCE'
 export const ALLSOURCES = 'ALLSOURCES'
 export const UPDATESOURCE = 'UPDATESOURCE'
+
+export const ADDTAG = 'ADDTAG'
+export const ALLTAGS = 'ALLTAGS'
+export const UPDATETAG = 'UPDATETAG'

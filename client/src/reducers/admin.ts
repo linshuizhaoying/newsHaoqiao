@@ -1,8 +1,12 @@
-import { CHECKSOURCE, ALLSOURCES, REMOVESOURCE, UPDATESOURCES, ADDSOURCE } from '../constants/admin';
+
+import { CHECKSOURCE, ALLSOURCES, REMOVESOURCE, UPDATESOURCES, ADDSOURCE,
+         ALLTAGS, ADDTAG, UPDATETAG
+} from '../constants/admin';
 
 const initialState = {
   currentSourceData:'',
-  currentSourceList:''
+  currentSourceList:'',
+  allTags:''
 }
 
 const admin = (state = initialState, action: any) => {
@@ -17,6 +21,11 @@ const admin = (state = initialState, action: any) => {
       return {
         ...state,
         currentSourceList: action.data.data
+      }
+    case ALLTAGS:
+      return {
+        ...state,
+        allTags: action.data.data
       }
       
     default:

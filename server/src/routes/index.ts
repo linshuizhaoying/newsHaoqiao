@@ -1,3 +1,4 @@
+import { allTags } from '../service/tagApi';
 import * as Irouter from 'koa-router';
 import tokenPermission from '../middleware/token'
 import * as Service from '../service';
@@ -16,7 +17,10 @@ export const Router = (app: any) => {
           addSource,
           allSources,
           removeSource,
-          updateSource
+          updateSource,
+          addTag,
+          allTags,
+          updateTag
         } = Service
 
   router.post('/reg', Service.reg)
@@ -31,6 +35,9 @@ export const Router = (app: any) => {
         .get('/allSources', tokenPermission, allSources)
         .post('/removeSource', tokenPermission, removeSource)
         .post('/updateSource', tokenPermission, updateSource)
+        .get('/allTags', tokenPermission, allTags)
+        .post('/updateTag', tokenPermission, updateTag)
+        .post('/addTag', tokenPermission, addTag)
 
   router.all('/*',  async (ctx, next) => {
     ctx.body = '404'

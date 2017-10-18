@@ -16,3 +16,7 @@ export const ADDSOURCE_API =  baseUrl + '/api/addSource';
 export const ALLSOURCES_API =  baseUrl + '/api/allSources';
 export const REMOVESOURCE_API =  baseUrl + '/api/removeSource';
 export const UPDATESOURCE_API =  baseUrl + '/api/updateSource';
+
+export const ADDTAG_API =  baseUrl + '/api/addTag';
+export const ALLTAGS_API =  baseUrl + '/api/allTags';
+export const UPDATETAG_API =  baseUrl + '/api/updateTag';
