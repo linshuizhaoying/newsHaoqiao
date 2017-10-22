@@ -18,9 +18,31 @@
 .NewsItem .content .newsTitle {
   font-family: Verdana, Geneva, sans-serif;
   font-size: 10pt;
+  flex: 2;
+}
+.NewsItem .content .newsTitle .enTitle {
+  position: relative;
+  text-decoration: none;
+  padding: 20px;
+  -webkit-transition: all 0.1s ease-out;
+}
+.NewsItem .content .newsTitle .enTitle:hover:after {
+  content: attr(data-en);
+  background: white;
+  position: absolute;
+  border: 1px solid black;
+  left: 20px;
+  top: 45px;
+  vertical-align: middle;
+  padding: 5px;
+  white-space: nowrap;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-size: 12px;
 }
 .NewsItem .content .source {
   margin-left: 20px;
+  flex: 1;
 }
 .NewsItem .time {
   flex: 1;

@@ -6,7 +6,9 @@ export const LOGIN_API = baseUrl +  '/api/login';
 export const LOGOUT_API = baseUrl + '/api/logout';
 export const USERINFO_API = baseUrl + '/api/userInfo';
 export const TOKEN_API = baseUrl + '/api/token';
-export const TAGLIST_API = baseUrl + '/api/tagList';
+export const TAGLIST_API = baseUrl + '/api/allTags';
+export const NEWSLIST_API =  baseUrl + '/api/allNews';
+
 
 // 管理员操作
 export const FRAME_API = baseUrl + '/api/requestFrame';

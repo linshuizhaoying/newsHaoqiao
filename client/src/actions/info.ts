@@ -1,28 +1,44 @@
-import { TAG_LIST 
+import { TAGLIST_API, NEWSLIST_API } from '../service/api';
+import axios from '../util/axios'
+import { getToken } from '../util/store';
+
+import { TAG_LIST, NEWS_LIST 
  } from '../constants/info'
 
-//  import {
-//   TAGLIST_API, // 标签列表接口
-// } from '../service/api'
-
+ 
 const tagList = (data: any) => ({
   type: TAG_LIST,
   data: data,
 })
 
+const newsList = (data: any) => ({
+  type: NEWS_LIST,
+  data: data,
+})
+
+
 export function TagListRemote () {
-  // return (dispatch: any) => axios.post(LOGIN_API, user)
-  // .then((info: any) => {
-  //   dispatch(tagList(info))
-  //   return info
-  // })
-  return (dispatch: any) =>{
-    let arr = {
-      data:['前端','Node.js','css','javascript','vue','react','typescript','redis','mongodb','es6'],
-      state:{
-        code: 1
-      }
-    }
-    dispatch(tagList(arr))
-  }
+    // 写入权限验证
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
+    return (dispatch: any) => axios.get(TAGLIST_API)
+    .then((info: any) => {
+      let result: any[] = []
+      const final: any[] = []
+      result = info.data.data.filter( (item: any) => {return item.status === '活跃'})
+      result.forEach( (item: any) => { final.push(item.tagTitle)})
+      info.data = final
+      console.log(info)
+      dispatch(tagList(info))
+      return info
+    })
+}
+
+export function newsListRemote () {
+  // 写入权限验证
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
+  return (dispatch: any) => axios.get(NEWSLIST_API)
+  .then((info: any) => {
+    dispatch(newsList(info))
+    return info
+  })
 }

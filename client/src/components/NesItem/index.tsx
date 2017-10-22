@@ -23,20 +23,33 @@ export class NewsItem extends React.Component<any, any> {
   }
   
   componentWillMount() {
-    // 求差集,将原有的tag过滤出去
-    let difference = 
-      this.props.tagList
-      .concat(this.props.myTagList)
-      .filter((v: any) => !this.props.tagList.includes(v) || !this.props.myTagList.includes(v))
-
     this.setState({
       isLike: this.props.data.like,
-      tagList: difference,
-      myTagList: this.props.myTagList
+      tagList: [],
+      myTagList: []
     })
   }
 
   componentWillReceiveProps(nextProps: any) {
+    if(nextProps.tagList.length > 0){
+      const allTag = nextProps.tagList.map((item: any)=> {
+        return item.toLowerCase()
+      });
+      const myTag = nextProps.myTagList.map((item: any)=> {
+        return item.toLowerCase()
+      });
+      let difference = 
+        allTag
+        .concat(allTag)
+        .filter((v: any) => !allTag.includes(v) || !myTag.includes(v))
+  
+      this.setState({
+        isLike: this.props.data.like,
+        tagList: difference,
+        myTagList: nextProps.myTagList,
+      })
+    }
+   
   }
 
   like() {
@@ -81,27 +94,27 @@ export class NewsItem extends React.Component<any, any> {
   }
 
   render () {
-    const menu = (
-      <Menu onClick ={this.menuSelect}>
-        <Menu.Item disabled>选择该咨询的分类标签</Menu.Item>
-        <Menu.Divider />
-        <SubMenu title="添加标签">
-          {
-            this.state.tagList.map((item :any,key :any)=>{
-               return <Menu.Item type="add" key={item}><span className="hadTag">{item}</span></Menu.Item>
-            })
-          }
-        </SubMenu>
-        <SubMenu title="去除标签">
-          {
-            this.state.myTagList.map((item :any,key :any)=>{
-               return <Menu.Item key={'cancel ' + item}><span>{item}</span></Menu.Item>
-            })
-          }
+    // const menu = (
+    //   <Menu onClick ={this.menuSelect}>
+    //     <Menu.Item disabled>选择该咨询的分类标签</Menu.Item>
+    //     <Menu.Divider />
+    //     <SubMenu title="添加标签">
+    //       {
+    //         this.state.tagList.map((item :any,key :any)=>{
+    //            return <Menu.Item type="add" key={item}><span className="hadTag">{item}</span></Menu.Item>
+    //         })
+    //       }
+    //     </SubMenu>
+    //     <SubMenu title="去除标签">
+    //       {
+    //         this.state.myTagList.map((item :any,key :any)=>{
+    //            return <Menu.Item key={'cancel ' + item}><span>{item}</span></Menu.Item>
+    //         })
+    //       }
 
-        </SubMenu>
-      </Menu>
-    );
+    //     </SubMenu>
+    //   </Menu>
+    // );
     
     return(
       <div className="NewsItem">
@@ -110,27 +123,30 @@ export class NewsItem extends React.Component<any, any> {
         </div>
         <div className="content">
           <div className="newsTitle">
-             <a target="_blank" href={'http://' + this.props.data.link}>{this.props.data.title}</a>
+             <a target="_blank"
+             data-en={this.props.data.enTitle}
+             className={ `${this.props.data.enTitle ? 'enTitle' : ''}`}
+             href={(this.props.data.url.includes('http') ? this.props.data.url : this.props.data.sourceLink + this.props.data.url)}>{this.props.data.title}</a>
           </div>
           <div className="source">
-             (<a  target="_blank" href={'http://' + this.props.data.sourceLink}>{this.props.data.sourceTitle}</a>)
+             (<a  target="_blank" href={this.props.data.sourceLink}>{this.props.data.sourceTitle}</a>)
           </div>
         </div>
         
         <div className="time">
-          <TimeAgo datetime={this.props.data.createDate || "2017-10-01"} 
+          <TimeAgo datetime={this.props.data.CreateDate || "2017-10-01"} 
            locale='zh_CN' />
         </div>
 
         <div className="operate">
 
-          <div className="addCollection">
+          {/* <div className="addCollection">
             <Dropdown overlay={menu} trigger={['click']}>
               <a className="ant-dropdown-link" href="#">
                 <Icon type="ellipsis" />
               </a>
             </Dropdown>
-          </div>
+          </div> */}
 
           <div className={ 'like' + ` ${this.state.isLike ? 'islike' : 'unlike'}`} onClick={this.like}>
             <Icon type="heart"></Icon>

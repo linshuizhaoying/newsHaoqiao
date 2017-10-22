@@ -6,6 +6,7 @@ const Logger = require("koa-logger");
 const bodyParser = require("koa-bodyparser");
 const routes_1 = require("./routes");
 const config_1 = require("./config");
+const spiderMan_1 = require("./service/spider/spiderMan");
 const app = new Koa();
 // 如果是开发者模式
 if (process.env.NODE_ENV === 'production') {
@@ -31,6 +32,7 @@ const port = config_1.config.app.port;
 console.log('服务正在监听端口:' + port);
 app.listen(port, () => {
     console.log(('  App is running at http://localhost:%d in %s mode'), port, process.env.NODE_ENV);
+    spiderMan_1.spiderInitial();
     console.log('  Press CTRL-C to stop\n');
 });
 //# sourceMappingURL=app.js.map

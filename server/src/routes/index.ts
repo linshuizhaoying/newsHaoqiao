@@ -20,7 +20,8 @@ export const Router = (app: any) => {
           updateSource,
           addTag,
           allTags,
-          updateTag
+          updateTag,
+          allNews
         } = Service
 
   router.post('/reg', Service.reg)
@@ -35,10 +36,10 @@ export const Router = (app: any) => {
         .get('/allSources', tokenPermission, allSources)
         .post('/removeSource', tokenPermission, removeSource)
         .post('/updateSource', tokenPermission, updateSource)
-        .get('/allTags', tokenPermission, allTags)
+        .get('/allTags', allTags)
         .post('/updateTag', tokenPermission, updateTag)
         .post('/addTag', tokenPermission, addTag)
-
+        .get('/allNews', tokenPermission, allNews)
   router.all('/*',  async (ctx, next) => {
     ctx.body = '404'
   })

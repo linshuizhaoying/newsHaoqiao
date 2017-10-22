@@ -15,7 +15,6 @@ import './index.less';
 
 
 
-
 export class App extends React.Component<any, any> {
   constructor (props: any) {
     super(props)
@@ -37,11 +36,12 @@ export class App extends React.Component<any, any> {
   }
   
   componentWillMount() {
-    const { dispatch } = this.props;
-    dispatch(TagListRemote())
+
   }
   componentDidMount() {
     this.checkLogin()
+    const { dispatch } = this.props;
+    dispatch(TagListRemote())
   }
   componentWillReceiveProps(nextProps: any) {
     const { history } = this.props;
@@ -99,7 +99,7 @@ export class App extends React.Component<any, any> {
 const mapStateToProps = (state: any) => ({
   isLogin: state.user.isLogin,
   userName: state.user.userName,
-  allTags: state.info.allTags
+  allTags: state.info.allTags,
 })
 
 App = connect(mapStateToProps)(App);

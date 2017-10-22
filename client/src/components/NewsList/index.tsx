@@ -30,7 +30,9 @@ export class NewsList extends React.Component<any, any> {
       nextProps.data.map((item: any, key: any) =>{
          arr.push({
           key: key,
-          item: <NewsItem myTagList={item.tagList} tagList={this.props.tagList} key={key} data={item} index={key + 1}></NewsItem>
+          item: <NewsItem myTagList={[item.tagList] } 
+          
+          tagList={this.props.tagList} key={key} data={item} index={key + 1}></NewsItem>
          })
       })
       this.setState({

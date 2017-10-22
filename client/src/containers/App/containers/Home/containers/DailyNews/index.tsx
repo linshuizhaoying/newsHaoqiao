@@ -3,7 +3,7 @@ import NewsList from '../../../../../../components/NewsList/index';
 import NewTag from '../../../../../../components/NewTag/index';
 import Loader from '../../../../../../components/Loader/index';
 import { connect } from 'react-redux';
-
+import { newsListRemote } from '../../../../../../actions';
 import {
   Dropdown,
   Icon,
@@ -17,6 +17,8 @@ export class DailyNews extends React.Component<any, any> {
     super(props)
     this.dropSelect = this.dropSelect.bind(this)
     this.toggleLanguage = this.toggleLanguage.bind(this)
+    this.getTagList = this.getTagList.bind(this)
+    this.getDailyData = this.getDailyData.bind(this)
     this.state = {
       allData: '',
       currentDailyData: '',
@@ -28,341 +30,23 @@ export class DailyNews extends React.Component<any, any> {
   }
 
   getTagList() {
+    console.log(this.props)
     this.setState({
       tagList: this.props.tagList
     })
   }
   
-  getDailyData() {
+  getDailyData(daily: any) {
+    console.log(daily)
     let data = {
       "total":20, // 一共多少页
-      "newsList":[
-        {
-          id:'001',
-          title:'[译] Web 真相：cSS 不是真正的编程',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'开发者头条',
-          sourceLink:'toutiao.io',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'1',
-          like:false,
-          score:'1',
-          tagList:['前端','css'],
-        },
-        {
-          id:'002',
-          title:'typescript 源码阅读（上）',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'开发者头条',
-          sourceLink:'toutiao.io',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'1',
-          like:false,
-          score:'1',
-          tagList:['前端','typescript'],
-        },
-        {
-         id:'003',
-         title:'javaScript 闭包',
-         enTitle:'',
-         link:'http://toutiao.io//k/g8bv5e',
-         sourceTitle:'开发者头条',
-         sourceLink:'toutiao.io',
-         createDate:'2017-10-02', // YY-MM-DD-HH
-         type:'spider',
-         body:'',
-         enBody:'',
-         read:'1',
-         like:false,
-         score:'1',
-         tagList:['前端','javascript'],
-        },
-        {
-          id:'004',
-          title:'ES6系列文章 Promise',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'开发者头条',
-          sourceLink:'toutiao.io',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'1',
-          like:false,
-          score:'1',
-          tagList:['前端','javascript'],
-         },
-         {
-          id:'005',
-          title:'setTimeout与setInterval的区别和nodejs中的差异',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'segmentfault',
-          sourceLink:'segmentfault.com',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['前端','javascript'],
-         },
-         {
-          id:'006',
-          title:'2017年react面试复习资料整理',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'segmentfault',
-          sourceLink:'segmentfault.com',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['react'],
-         },
-         {
-          id:'007',
-          title:'vue 将echarts封装为组件一键使用',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'segmentfault',
-          sourceLink:'segmentfault.com',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['Vue'],
-         },{
-          id:'008',
-          title:'[译] Web 真相：cSS 不是真正的编程',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'开发者头条',
-          sourceLink:'toutiao.io',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'1',
-          like:false,
-          score:'1',
-          tagList:['前端','css'],
-        },
-        {
-          id:'009',
-          title:'typescript 源码阅读（上）',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'开发者头条',
-          sourceLink:'toutiao.io',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'1',
-          like:false,
-          score:'1',
-          tagList:['前端','typescript'],
-        },
-        {
-         id:'010',
-         title:'javaScript 闭包',
-         enTitle:'',
-         link:'http://toutiao.io//k/g8bv5e',
-         sourceTitle:'开发者头条',
-         sourceLink:'toutiao.io',
-         createDate:'2017-10-02', // YY-MM-DD-HH
-         type:'spider',
-         body:'',
-         enBody:'',
-         read:'1',
-         like:false,
-         score:'1',
-         tagList:['前端','javascript'],
-        },
-        {
-          id:'011',
-          title:'ES6系列文章 Promise',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'开发者头条',
-          sourceLink:'toutiao.io',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'1',
-          like:false,
-          score:'1',
-          tagList:['前端','javascript'],
-         },
-         {
-          id:'012',
-          title:'setTimeout与setInterval的区别和nodejs中的差异',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'segmentfault',
-          sourceLink:'segmentfault.com',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['前端','javascript'],
-         },
-         {
-          id:'013',
-          title:'2017年react面试复习资料整理',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'segmentfault',
-          sourceLink:'segmentfault.com',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['react'],
-         },
-         {
-          id:'014',
-          title:'vue 将echarts封装为组件一键使用',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'segmentfault',
-          sourceLink:'segmentfault.com',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['Vue'],
-         },
-         {
-          id:'015',
-          title:'ES6系列文章 Promise',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'开发者头条',
-          sourceLink:'toutiao.io',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'1',
-          like:false,
-          score:'1',
-          tagList:['前端','javascript'],
-         },
-         {
-          id:'016',
-          title:'setTimeout与setInterval的区别和nodejs中的差异',
-          enTitle:'cSS font-variant tester',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'segmentfault',
-          sourceLink:'segmentfault.com',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['前端','javascript'],
-         },
-         {
-          id:'017',
-          title:'2017年react面试复习资料整理',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'segmentfault',
-          sourceLink:'segmentfault.com',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['react'],
-         },
-         {
-          id:'018',
-          title:'vue 将echarts封装为组件一键使用',
-          enTitle:'',
-          link:'http://toutiao.io//k/g8bv5e',
-          sourceTitle:'segmentfault',
-          sourceLink:'segmentfault.com',
-          createDate:'2017-10-02', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['Vue'],
-         },
-         {
-          id:'019',
-          title:'xxxxx',
-          enTitle:'cSS font-display: The Future of Font Rendering on the Web',
-          link:'https://www.sitepoint.com/css-font-display-future-font-rendering-web/',
-          sourceTitle:'sitepoint',
-          sourceLink:'sitepoint.com',
-          createDate:'2017-10-03', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['cSS'],
-         },
-         {
-          id:'020',
-          title:'xxxxx',
-          enTitle:'20 principles for Craft CMS',
-          link:'https://www.sitepoint.com/css-font-display-future-font-rendering-web/',
-          sourceTitle:'sitepoint',
-          sourceLink:'sitepoint.com',
-          createDate:'2017-10-03', // YY-MM-DD-HH
-          type:'spider',
-          body:'',
-          enBody:'',
-          read:'12',
-          like:true,
-          score:'21',
-          tagList:['cSS'],
-         }
-      ]
+      "newsList": daily
     }
     this.setState({
       allData: data,
     },()=>{
       this.changeLanguage('cn')
-      setTimeout(()=>{this.setState({loading:false})},3000)
+      setTimeout(()=>{this.setState({loading:false})},1000)
     })
   }
   /** 
@@ -374,16 +58,17 @@ export class DailyNews extends React.Component<any, any> {
   changeLanguage(type: string){
     let temp
     // 浅拷贝赋值
-    let { newsList } = this.state.allData
+    console.log(this.state.allData)
+    let { newsList }  = this.state.allData
     if(type === 'cn'){
       temp = newsList
         .filter((item: any, key: any) => {
-          return item.enTitle.length === 0
+          return item.enTitle === null
       })
     }else{
       temp = newsList
       .filter((item: any, key: any) => {
-        return item.enTitle.length !== 0
+        return item.enTitle !== null
       })
     }
     newsList = temp
@@ -396,11 +81,16 @@ export class DailyNews extends React.Component<any, any> {
 
   componentDidMount() {
     this.getTagList()
-    this.getDailyData()
+    const { dispatch } = this.props;
+    dispatch(newsListRemote())
   }
 
   componentWillReceiveProps(nextProps: any) {
-
+    console.log(nextProps)
+    if(nextProps){
+      console.log('233',nextProps)
+      this.getDailyData(nextProps.newsList)
+    }
   }
 
   dropSelect = (key: any) => {
@@ -463,15 +153,12 @@ export class DailyNews extends React.Component<any, any> {
             <NewTag></NewTag>
           </div>
           <div className="switch">
-           
             <Switch checkedChildren="切换中文咨询" unCheckedChildren="切换英文咨询" onChange={this.toggleLanguage}/>
           </div>
         </div>
         <hr></hr>
-
-
         <Loader show={this.state.loading} ></Loader>
-        <NewsList show={!this.state.loading} data={this.state.currentDailyData} tagList={this.state.tagList}>
+        <NewsList show={!this.state.loading} data={this.state.currentDailyData} tagList={this.props.tagList}>
          
         </NewsList>
       </div>
@@ -480,7 +167,8 @@ export class DailyNews extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any) => ({
-  tagList: state.info.tagList
+  tagList: state.info.tagList,
+  newsList: state.info.newsList
 })
 
 DailyNews = connect(mapStateToProps)(DailyNews);

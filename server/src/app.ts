@@ -2,10 +2,10 @@ import * as Koa from 'koa';
 import * as Cors from 'koa-cors'
 import * as Logger from 'koa-logger'
 import * as bodyParser from 'koa-bodyparser'
-
 import { Router } from './routes'
 
 import { config } from './config'
+import { spiderInitial } from './service/spider/spiderMan';
 const app = new Koa()
 // 如果是开发者模式
 if (process.env.NODE_ENV === 'production') {
@@ -32,10 +32,11 @@ mongoose.connect(config.mongo.url, { useMongoClient: true }).catch((err: any) =>
 app.use(bodyParser())
 
 Router(app)
-
 const port = config.app.port
 console.log('服务正在监听端口:' + port)
 app.listen(port, () => {
   console.log(('  App is running at http://localhost:%d in %s mode'), port, process.env.NODE_ENV);
+  spiderInitial()
+
   console.log('  Press CTRL-C to stop\n');
 });

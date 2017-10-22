@@ -8,4 +8,5 @@ __export(require("./adminApi"));
 __export(require("./sourceApi"));
 __export(require("./tagApi"));
 __export(require("./spider"));
+__export(require("./newsApi"));
 //# sourceMappingURL=index.js.map
