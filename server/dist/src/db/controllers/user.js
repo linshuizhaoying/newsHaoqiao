@@ -46,32 +46,6 @@ exports.LoginUser = (user) => __awaiter(this, void 0, void 0, function* () {
     const { username, password } = user;
     console.log('用户正在登录:');
     console.log(user);
-    let hadUser = '';
-    const result = {
-        status: '',
-        userId: '',
-        userName: '',
-        msg: ''
-    };
-    yield User.findOne({ 'username': username }, (err, data) => {
-        hadUser = data;
-    });
-    console.log('hadUser:', hadUser);
-    console.log(hadUser === null || hadUser.password === password);
-    if (hadUser === null || hadUser.password !== password) {
-        result.msg = '账户不存在或者密码错误';
-        result.status = 'error';
-        return result;
-    }
-    else {
-        console.log('查询后的信息为:');
-        console.log(hadUser);
-        result.msg = '用户登录成功!';
-        result.status = 'success';
-        result.userId = hadUser._id;
-        result.userName = hadUser.username;
-        console.log(result);
-        return result;
-    }
+    return User.findOne({ 'username': username });
 });
 //# sourceMappingURL=user.js.map

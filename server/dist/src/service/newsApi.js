@@ -31,10 +31,10 @@ const error = () => {
     };
 };
 exports.allNews = (ctx) => __awaiter(this, void 0, void 0, function* () {
-    console.log('allNews');
-    console.log(ctx.request.body);
+    // console.log('allNews')
+    // console.log(ctx.request.body)
     const result = yield index_1.AllNews();
-    console.log(result);
+    // console.log(result)
     return ctx.body = success(result);
 });
 //# sourceMappingURL=newsApi.js.map

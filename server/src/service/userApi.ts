@@ -125,9 +125,26 @@ export const login = async(ctx: any) => {
    if (Validator.userCheck(username) && Validator.passCheck(password)) {
     // 数据符合规范
     // 查询数据库
-      let result: any = ''
-      result = await LoginUser( {username, password} )
+      const result: Result = {
+        status: '',
+        userId: '',
+        userName: '',
+        msg: ''
+      }
+      const hadUser = await LoginUser( {username, password} )
       console.log('登录用户状况:\n', result)
+      if (hadUser === null || hadUser.password !== password) {
+        result.msg = '账户不存在或者密码错误'
+        result.status = 'error'
+      } else {
+        console.log('查询后的信息为:' )
+        console.log(hadUser)
+        result.msg = '用户登录成功!'
+        result.status = 'success'
+        result.userId = hadUser._id
+        result.userName = hadUser.username
+      }
+
       if (result.status === 'error') {
         // 用户不存在 或者 用户密码错误
         return ctx.body =  error(

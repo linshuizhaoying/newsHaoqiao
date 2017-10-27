@@ -29,7 +29,7 @@ exports.Router = (app) => {
         .get('/allTags', allTags)
         .post('/updateTag', token_1.default, updateTag)
         .post('/addTag', token_1.default, addTag)
-        .get('/allNews', token_1.default, allNews);
+        .get('/allNews', allNews);
     router.all('/*', (ctx, next) => __awaiter(this, void 0, void 0, function* () {
         ctx.body = '404';
     }));

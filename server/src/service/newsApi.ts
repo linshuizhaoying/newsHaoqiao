@@ -25,9 +25,9 @@ const error = () => {
 
 
 export const allNews = async(ctx: any) => {
-  console.log('allNews')
-  console.log(ctx.request.body)
+  // console.log('allNews')
+  // console.log(ctx.request.body)
   const result = await AllNews()
-  console.log(result)
+  // console.log(result)
   return ctx.body = success(result)
 }

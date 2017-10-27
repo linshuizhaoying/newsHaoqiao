@@ -22,8 +22,7 @@
   flex-direction: row-reverse;
 }
 #DailyNews tr > td {
-  padding: 18px 10px;
-  font-size: 16px;
+  font-size: 1rem;
 }
 .show {
   display: block;

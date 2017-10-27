@@ -29,6 +29,7 @@ export class App extends React.Component<any, any> {
       console.log('登录状态')
       const { dispatch } = this.props;
       dispatch(TokenRemote())
+      history.push('/home')
     } else {
       console.log('未登录状态')
       history.push('/login')
@@ -41,13 +42,18 @@ export class App extends React.Component<any, any> {
   componentDidMount() {
     this.checkLogin()
     const { dispatch } = this.props;
+    console.log(this.props)
     dispatch(TagListRemote())
   }
   componentWillReceiveProps(nextProps: any) {
-    const { history } = this.props;
-    if(nextProps.userName === 'admin'){
-      history.push('/xyt')
-    }
+    // const { history } = this.props;
+    // console.log(nextProps)
+    // if(nextProps.userName === 'admin'){
+    //   history.push('/xyt')
+    // }
+    // if(!nextProps.isLogin){
+    //   history.push('/login')
+    // }
   }
 
   logOut() {

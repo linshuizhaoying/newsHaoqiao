@@ -7,6 +7,9 @@
 #Home .ant-tabs-tab {
   padding: 50px;
 }
+#Home .ant-tabs-vertical.ant-tabs-left > .ant-tabs-bar {
+  height: 560px;
+}
 #Home .ant-tabs-vertical.ant-tabs-left > .ant-tabs-content {
   padding-left: 0px;
   font-family: serif;

@@ -110,9 +110,26 @@ exports.login = (ctx) => __awaiter(this, void 0, void 0, function* () {
     if (validator_1.default.userCheck(username) && validator_1.default.passCheck(password)) {
         // 数据符合规范
         // 查询数据库
-        let result = '';
-        result = yield controllers_1.LoginUser({ username, password });
+        const result = {
+            status: '',
+            userId: '',
+            userName: '',
+            msg: ''
+        };
+        const hadUser = yield controllers_1.LoginUser({ username, password });
         console.log('登录用户状况:\n', result);
+        if (hadUser === null || hadUser.password !== password) {
+            result.msg = '账户不存在或者密码错误';
+            result.status = 'error';
+        }
+        else {
+            console.log('查询后的信息为:');
+            console.log(hadUser);
+            result.msg = '用户登录成功!';
+            result.status = 'success';
+            result.userId = hadUser._id;
+            result.userName = hadUser.username;
+        }
         if (result.status === 'error') {
             // 用户不存在 或者 用户密码错误
             return ctx.body = error({

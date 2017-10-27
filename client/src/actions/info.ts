@@ -34,8 +34,6 @@ export function TagListRemote () {
 }
 
 export function newsListRemote () {
-  // 写入权限验证
-  axios.defaults.headers.common['Authorization'] = 'Bearer ' + getToken() 
   return (dispatch: any) => axios.get(NEWSLIST_API)
   .then((info: any) => {
     dispatch(newsList(info))

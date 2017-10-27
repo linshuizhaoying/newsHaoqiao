@@ -1,6 +1,5 @@
 import { TAG_LIST, NEWS_LIST } from '../constants/info';
 
-
 const initialState = {
   tagList: [],
   newsList: []

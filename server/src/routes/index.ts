@@ -39,7 +39,7 @@ export const Router = (app: any) => {
         .get('/allTags', allTags)
         .post('/updateTag', tokenPermission, updateTag)
         .post('/addTag', tokenPermission, addTag)
-        .get('/allNews', tokenPermission, allNews)
+        .get('/allNews', allNews)
   router.all('/*',  async (ctx, next) => {
     ctx.body = '404'
   })

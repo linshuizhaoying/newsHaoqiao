@@ -33,13 +33,12 @@ class Login extends React.Component<any, any> {
   }
 
   componentWillReceiveProps(nextProps: any) {
-    // console.log(nextProps)
-    if(nextProps.status === 1){
+    console.log(nextProps)
+    if(nextProps.status === 1 && nextProps.isLogin ){
       NotificationUtils.notificationSuccess("登录成功!", nextProps.msg, 2);
       const { history } = this.props;
       // 本地缓存token
       setToken(nextProps.token)
-
       history.push({ pathname: '/home'});
     }
 
@@ -75,6 +74,7 @@ class Login extends React.Component<any, any> {
       let {username, password} = values;
       
       if (!err && username.length > 0 && password.length > 0) {
+        console.log('提交中...')
         const { dispatch } = this.props;
         dispatch(LoginInRemote({username, password}))
       }
@@ -131,6 +131,6 @@ const mapStateToProps = (state: any) => ({
   token: state.user.token
 })
 
-Login = connect(mapStateToProps)(Login);
+Login = connect(mapStateToProps)(Login)
 const LoginWrapper = Form.create()(Login)
 export default LoginWrapper;

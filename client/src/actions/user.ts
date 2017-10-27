@@ -81,7 +81,9 @@ export function TokenRemote (){
   .then((info: any) => {
    // console.log(info)
     if(info === undefined){
+      dispatch(userLogout())
       removeToken()
+      console.log('info undefined')
     }else{
       dispatch(userToken(info))
     }
