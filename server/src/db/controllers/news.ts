@@ -25,22 +25,22 @@ export const HoursNews = async() => {
    const end = new Date(GetDateStr(1)) // 明天 0点
    console.log(start)
    console.log(end)
-   return await News.find({'CreateDate': {'$gte': start, '$lt': end}})
+   return await News.find({'CreateDate': {'$gte': start, '$lt': end}}).sort({CreateDate: -1})
 }
 
 export const WeeksNews = async() => {
   const start = new Date(GetDateStr(-7)) // 一个星期前
-  const end = new Date(GetDateStr(1)) // 明天 0点
+  const end = new Date(GetDateStr(0)) // 明天 0点
   console.log(start)
   console.log(end)
-  return await News.find({'CreateDate': {'$gte': start, '$lt': end}})
+  return await News.find({'CreateDate': {'$gte': start, '$lt': end}}).sort({CreateDate: -1})
 }
 export const MouthsNews = async() => {
   const start = new Date(GetDateStr(-31)) // 一个月前
-  const end = new Date(GetDateStr(1)) // 明天 0点
+  const end = new Date(GetDateStr(-7)) // 明天 0点
   console.log(start)
   console.log(end)
-  return await News.find({'CreateDate': {'$gte': start, '$lt': end}})
+  return await News.find({'CreateDate': {'$gte': start, '$lt': end}}).sort({CreateDate: -1})
 }
 export const saveToNews = async(item: NewsData) => {
   const { title, enTitle, url, sourceTitle, sourceLink, type, tagList, read, score} = item

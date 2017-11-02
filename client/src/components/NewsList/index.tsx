@@ -53,8 +53,7 @@ export class NewsList extends React.Component<any, any> {
           : <div>Nothing</div>
         } */}
         
-        <Table columns={columns} dataSource={this.state.dataSource} bordered
-         size="middle"/>
+        <Table pagination={{ pageSize: 88 }} scroll={{ y: 480 }} columns={columns} dataSource={this.state.dataSource} bordered size="middle"/>
 
       </div>
     )

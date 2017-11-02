@@ -22,21 +22,21 @@ exports.HoursNews = () => __awaiter(this, void 0, void 0, function* () {
     const end = new Date(GetDateStr(1)); // 明天 0点
     console.log(start);
     console.log(end);
-    return yield News.find({ 'CreateDate': { '$gte': start, '$lt': end } });
+    return yield News.find({ 'CreateDate': { '$gte': start, '$lt': end } }).sort({ CreateDate: -1 });
 });
 exports.WeeksNews = () => __awaiter(this, void 0, void 0, function* () {
     const start = new Date(GetDateStr(-7)); // 一个星期前
-    const end = new Date(GetDateStr(1)); // 明天 0点
+    const end = new Date(GetDateStr(0)); // 明天 0点
     console.log(start);
     console.log(end);
-    return yield News.find({ 'CreateDate': { '$gte': start, '$lt': end } });
+    return yield News.find({ 'CreateDate': { '$gte': start, '$lt': end } }).sort({ CreateDate: -1 });
 });
 exports.MouthsNews = () => __awaiter(this, void 0, void 0, function* () {
     const start = new Date(GetDateStr(-31)); // 一个月前
-    const end = new Date(GetDateStr(1)); // 明天 0点
+    const end = new Date(GetDateStr(-7)); // 明天 0点
     console.log(start);
     console.log(end);
-    return yield News.find({ 'CreateDate': { '$gte': start, '$lt': end } });
+    return yield News.find({ 'CreateDate': { '$gte': start, '$lt': end } }).sort({ CreateDate: -1 });
 });
 exports.saveToNews = (item) => __awaiter(this, void 0, void 0, function* () {
     const { title, enTitle, url, sourceTitle, sourceLink, type, tagList, read, score } = item;
