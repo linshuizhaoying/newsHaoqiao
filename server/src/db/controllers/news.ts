@@ -12,11 +12,40 @@ interface NewsData {
   score: Number,
   CreateDate: Date
 }
+function GetDateStr(AddDayCount: any) {
+  const dd = new Date()
+  dd.setDate( dd.getDate() + AddDayCount) // 获取AddDayCount天后的日期
+  const y = dd.getFullYear()
+  const m = dd.getMonth() + 1 // 获取当前月份的日期
+  const d = dd.getDate()
+  return y + '-' + m + '-' + d
+}
+export const HoursNews = async() => {
+   const start = new Date(GetDateStr(0)) // 今天 0点
+   const end = new Date(GetDateStr(1)) // 明天 0点
+   console.log(start)
+   console.log(end)
+   return await News.find({'CreateDate': {'$gte': start, '$lt': end}})
+}
 
+export const WeeksNews = async() => {
+  const start = new Date(GetDateStr(-7)) // 一个星期前
+  const end = new Date(GetDateStr(1)) // 明天 0点
+  console.log(start)
+  console.log(end)
+  return await News.find({'CreateDate': {'$gte': start, '$lt': end}})
+}
+export const MouthsNews = async() => {
+  const start = new Date(GetDateStr(-31)) // 一个月前
+  const end = new Date(GetDateStr(1)) // 明天 0点
+  console.log(start)
+  console.log(end)
+  return await News.find({'CreateDate': {'$gte': start, '$lt': end}})
+}
 export const saveToNews = async(item: NewsData) => {
   const { title, enTitle, url, sourceTitle, sourceLink, type, tagList, read, score} = item
   const duplicate = {'title': title}
-  News.findOneAndUpdate( duplicate, {...item}, {upsert: true}, (err: any, doc: any) => {
+  News.findOneAndUpdate( duplicate, {...item}, {upsert: true, new: false}, (err: any, doc: any) => {
       // console.log('无重复插入成功!')
   })
 }

@@ -1,2 +1,4 @@
 export const TAG_LIST = 'TAG_LIST'
 export const NEWS_LIST = 'NEWS_LIST'
+export const WEEKSNEWS_LIST = 'WEEKSNEWS_LIST'
+export const MOUTHSNEWS_LIST = 'MOUTHSNEWS_LIST'

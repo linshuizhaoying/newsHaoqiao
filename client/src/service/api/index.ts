@@ -7,8 +7,9 @@ export const LOGOUT_API = baseUrl + '/api/logout';
 export const USERINFO_API = baseUrl + '/api/userInfo';
 export const TOKEN_API = baseUrl + '/api/token';
 export const TAGLIST_API = baseUrl + '/api/allTags';
-export const NEWSLIST_API =  baseUrl + '/api/allNews';
-
+export const NEWSLIST_API =  baseUrl + '/api/hoursNews';
+export const WEEKNEWSLIST_API =  baseUrl + '/api/weeksNews';
+export const MOUTHNEWSLIST_API =  baseUrl + '/api/mouthsNews';
 
 // 管理员操作
 export const FRAME_API = baseUrl + '/api/requestFrame';

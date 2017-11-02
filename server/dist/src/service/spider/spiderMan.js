@@ -72,6 +72,9 @@ exports.spiderInitial = () => __awaiter(this, void 0, void 0, function* () {
         yield insertTodayNews(todaySpiderResult);
         console.log('爬取失败资源数量:');
         console.log(errorQueueList.length);
+        errorQueueList.forEach((item) => {
+            console.log(item.url + ' 爬取失败');
+        });
     }));
 });
 const insertTodayNews = (array) => __awaiter(this, void 0, void 0, function* () {

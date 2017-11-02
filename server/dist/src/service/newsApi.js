@@ -37,4 +37,16 @@ exports.allNews = (ctx) => __awaiter(this, void 0, void 0, function* () {
     // console.log(result)
     return ctx.body = success(result);
 });
+exports.hoursNews = (ctx) => __awaiter(this, void 0, void 0, function* () {
+    const result = yield index_1.HoursNews();
+    return ctx.body = success(result);
+});
+exports.weeksNews = (ctx) => __awaiter(this, void 0, void 0, function* () {
+    const result = yield index_1.WeeksNews();
+    return ctx.body = success(result);
+});
+exports.mouthsNews = (ctx) => __awaiter(this, void 0, void 0, function* () {
+    const result = yield index_1.MouthsNews();
+    return ctx.body = success(result);
+});
 //# sourceMappingURL=newsApi.js.map

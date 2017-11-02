@@ -21,7 +21,10 @@ export const Router = (app: any) => {
           addTag,
           allTags,
           updateTag,
-          allNews
+          allNews,
+          hoursNews,
+          weeksNews,
+          mouthsNews
         } = Service
 
   router.post('/reg', Service.reg)
@@ -40,6 +43,9 @@ export const Router = (app: any) => {
         .post('/updateTag', tokenPermission, updateTag)
         .post('/addTag', tokenPermission, addTag)
         .get('/allNews', allNews)
+        .get('/hoursNews', hoursNews)
+        .get('/weeksNews', weeksNews)
+        .get('/mouthsNews', mouthsNews)
   router.all('/*',  async (ctx, next) => {
     ctx.body = '404'
   })

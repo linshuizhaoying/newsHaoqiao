@@ -3,7 +3,7 @@ import NewsList from '../../../../../../components/NewsList/index';
 import NewTag from '../../../../../../components/NewTag/index';
 import Loader from '../../../../../../components/Loader/index';
 import { connect } from 'react-redux';
-import { newsListRemote } from '../../../../../../actions';
+import { newsListRemote, WeeksNewsListRemote, MouthsNewsListRemote } from '../../../../../../actions';
 import {
   Dropdown,
   Icon,
@@ -94,19 +94,27 @@ export class DailyNews extends React.Component<any, any> {
   }
 
   dropSelect = (key: any) => {
-    console.log(key)
     switch(key.key){
       case '1':
         return this.setState({
           currentDataTime:'过去24小时'
+        }, () => {
+          const { dispatch } = this.props;
+          dispatch(newsListRemote())
         })
       case '2':
         return this.setState({
           currentDataTime:'过去一周'
+        }, () => {
+          const { dispatch } = this.props;
+          dispatch(WeeksNewsListRemote())
         })
       case '3':
         return this.setState({
           currentDataTime:'过去一月'
+        }, () => {
+          const { dispatch } = this.props;
+          dispatch(MouthsNewsListRemote())
         })
       default:
       return

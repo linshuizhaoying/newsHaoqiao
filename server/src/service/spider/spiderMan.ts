@@ -77,6 +77,9 @@ export const spiderInitial = async() => {
     await insertTodayNews(todaySpiderResult)
     console.log('爬取失败资源数量:')
     console.log(errorQueueList.length)
+    errorQueueList.forEach( (item: any) => {
+      console.log(item.url + ' 爬取失败')
+    })
   });
 }
 
