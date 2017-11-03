@@ -23,6 +23,7 @@ export class App extends React.Component<any, any> {
   }
 
   checkLogin() {
+    console.log(this.props)
     const { history } = this.props;
      // 只要本地缓存token那就是登录状态
      if (getToken() !== null) {
@@ -37,7 +38,7 @@ export class App extends React.Component<any, any> {
   }
   
   componentWillMount() {
-
+    console.log(this.props)
   }
   componentDidMount() {
     this.checkLogin()
@@ -102,12 +103,12 @@ export class App extends React.Component<any, any> {
     );
   }
 }
+
 const mapStateToProps = (state: any) => ({
   isLogin: state.user.isLogin,
   userName: state.user.userName,
-  allTags: state.info.allTags,
+  tagList: state.admin.tagList
 })
 
-App = connect(mapStateToProps)(App);
 
-export default App;
+export default connect(mapStateToProps)(App);

@@ -177,6 +177,5 @@ const mapStateToProps = (state: any) => ({
   tagList: state.admin.tagList
 })
 
-AdminManage = connect(mapStateToProps)(AdminManage);
 
-export default AdminManage;
+export default connect(mapStateToProps)(AdminManage);

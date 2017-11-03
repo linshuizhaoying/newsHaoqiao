@@ -1,9 +1,13 @@
 import * as React from 'react';
 import NewsItem from '../NesItem/index';
-import { Table, Icon, Menu, Switch } from 'antd';
+import { Table } from 'antd';
+import { TableColumnConfig } from 'antd/lib/table/Table';
 import './index.less';
 
-const columns = [{
+// Define a  generic Table 
+class MyTable extends Table<any>{}
+
+const columns:TableColumnConfig<any>[] = [{
   title: '',
   dataIndex: 'item',
   key: 'item',
@@ -53,8 +57,12 @@ export class NewsList extends React.Component<any, any> {
           : <div>Nothing</div>
         } */}
         
-        <Table pagination={{ pageSize: 88 }} scroll={{ y: 480 }} columns={columns} dataSource={this.state.dataSource} bordered size="middle"/>
 
+        {/* <Table pagination={{ pageSize: 88 }} scroll={{ y: 480 }} columns={columns} dataSource={this.state.dataSource} bordered size="middle"/> */}
+
+
+        <MyTable dataSource={this.state.dataSource} columns={columns} scroll={{ y: 480 }} bordered size='middle'>
+        </MyTable>
       </div>
     )
   }

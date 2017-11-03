@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './index.less';
-
+import { Layout, Menu, Icon } from 'antd';
+const { Sider, Header, Content, Footer} = Layout;
 export class AdminSearchTool extends React.Component<any, any> {
   constructor (props: any) {
     super(props)

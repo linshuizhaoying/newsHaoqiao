@@ -131,6 +131,9 @@ const mapStateToProps = (state: any) => ({
   token: state.user.token
 })
 
-const TLogin = connect(mapStateToProps)(Login)
-const LoginWrapper = Form.create<any>()(TLogin)
-export default LoginWrapper;
+// const TLogin = connect(mapStateToProps)(Login)
+// const LoginWrapper = Form.create<any>()(TLogin)
+
+const LoginForm = Form.create()(Login);
+
+export default connect(mapStateToProps)(LoginForm);

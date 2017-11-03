@@ -117,6 +117,5 @@ const mapStateToProps = (state: any) => ({
 
 })
 
-AdminNewsList = connect(mapStateToProps)(AdminNewsList);
 
-export default AdminNewsList;
+export default connect(mapStateToProps)(AdminNewsList);

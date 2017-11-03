@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import './index.less';
 
 
-class EditableCell extends React.Component {
+class EditableCell extends React.Component<any, any> {
   state = {
     value: this.props.value,
     id: this.props.id,

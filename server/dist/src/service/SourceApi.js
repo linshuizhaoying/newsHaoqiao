@@ -58,4 +58,4 @@ exports.updateSource = (ctx) => __awaiter(this, void 0, void 0, function* () {
     const { sourceTitle, url, lang, type, code } = ctx.request.body.source;
     return ctx.body = yield index_1.UpdateSource(id, { sourceTitle, url, lang, type, code });
 });
-//# sourceMappingURL=sourceApi.js.map
+//# sourceMappingURL=SourceApi.js.map

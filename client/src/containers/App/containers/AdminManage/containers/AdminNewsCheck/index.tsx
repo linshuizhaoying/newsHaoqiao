@@ -112,7 +112,11 @@ export class AdminNewsCheck extends React.Component<any, any> {
       title: '发送日期',
       dataIndex: 'date',
       key: 'date',
-      sorter: (a: any, b: any) =>  new Date(a.date) -   new Date(b.date),
+      sorter: (a: any, b: any) => {
+        const da = +new Date(a.date)
+        const db =  +new Date(b.date)
+        return da - db
+      },
       sortOrder: sortedInfo.columnKey === 'date' && sortedInfo.order,
     },{
       title: '操作',
@@ -143,6 +147,5 @@ const mapStateToProps = (state: any) => ({
 
 })
 
-AdminNewsCheck = connect(mapStateToProps)(AdminNewsCheck);
 
-export default AdminNewsCheck;
+export default connect(mapStateToProps)(AdminNewsCheck);

@@ -275,6 +275,5 @@ const mapStateToProps = (state: any) => ({
 
 })
 
-AdminNewsTool = connect(mapStateToProps)(AdminNewsTool);
 
-export default AdminNewsTool;
+export default connect(mapStateToProps)(AdminNewsTool);

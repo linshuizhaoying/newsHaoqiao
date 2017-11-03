@@ -4,10 +4,9 @@ import { Provider } from 'react-redux';
 import { Router, Route, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { configureStore } from './store';
-import { App } from './containers/App';
+import App from './containers/App/index';
 import registerServiceWorker from './registerServiceWorker';
 import AdminManage from './containers/App/containers/AdminManage/index';
-AdminManage
 const store = configureStore();
 const history = createBrowserHistory();
 

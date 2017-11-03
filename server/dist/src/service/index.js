@@ -5,7 +5,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./userApi"));
 __export(require("./adminApi"));
-__export(require("./sourceApi"));
+__export(require("./SourceApi"));
 __export(require("./tagApi"));
 __export(require("./spider"));
 __export(require("./newsApi"));

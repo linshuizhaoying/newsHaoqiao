@@ -160,7 +160,7 @@ const mapStateToProps = (state: any) => ({
   status: state.user.status,
   msg: state.user.msg,
 })
+const RegForm = Form.create()(Reg);
 
-Reg = connect(mapStateToProps)(Reg);
-const RegWrapper = Form.create()(Reg)
-export default RegWrapper;
+export default connect(mapStateToProps)(RegForm);
+

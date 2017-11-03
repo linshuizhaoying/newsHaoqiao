@@ -4,12 +4,11 @@ import _ from 'lodash'
 import TimeAgo from 'timeago-react';
 import {
   Badge,
-  Dropdown,
   Icon,
-  Menu
+  // Menu
   } from 'antd';
 import './index.less';
-const SubMenu = Menu.SubMenu;
+// const SubMenu = Menu.SubMenu;
 export class NewsItem extends React.Component<any, any> {
   constructor (props: any) {
     super(props)

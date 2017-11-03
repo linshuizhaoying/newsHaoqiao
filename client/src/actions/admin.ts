@@ -10,7 +10,6 @@ import { CHECKSOURCE,
          UPDATETAG
         } from '../constants/admin';
 import { getToken } from '../util/store';
-import { ADDTAG, UPDATETAG } from '../constants/admin';
 import { ADDSOURCE_API,
          ALLSOURCES_API, 
          REMOVESOURCE_API, 

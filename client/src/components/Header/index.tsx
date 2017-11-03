@@ -76,7 +76,7 @@ export class Header extends React.Component<any, any> {
                       pathname: '/reg',
                       state: {}
                     }}>
-                 <Button type="default">
+                 <Button>
                     <Icon type="user-add" /> 
                     注册
                   </Button>
