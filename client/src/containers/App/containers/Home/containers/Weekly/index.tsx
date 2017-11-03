@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { Button, Icon, Menu } from 'antd';
-import { Link } from 'react-router-dom';
 import './index.less';
 
 export class Weekly extends React.Component<any, any> {

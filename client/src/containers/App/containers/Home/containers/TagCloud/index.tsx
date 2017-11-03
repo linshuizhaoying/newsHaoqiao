@@ -389,7 +389,8 @@ const mapStateToProps = (state: any) => ({
   tagList: state.info.tagList
 })
 
-TagCloud = connect(mapStateToProps)(TagCloud)
 
-export default TagCloud
+const TagCloudWrapper = connect(mapStateToProps)(TagCloud)
+
+export default TagCloudWrapper
 

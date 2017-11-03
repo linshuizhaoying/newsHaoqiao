@@ -1,9 +1,6 @@
 import axios from 'axios'
 
-import createBrowserHistory from 'history/createBrowserHistory'
 import NotificationUtils from '../util/notification';
-
-const history = createBrowserHistory()
 
 let instance = axios.create({
   // `validateStatus`定义是否解析或拒绝给定的promise

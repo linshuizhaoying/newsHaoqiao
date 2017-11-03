@@ -393,8 +393,8 @@ export class DebugSearch extends React.Component<any, any> {
         label={group.title}
       >
         {group.children.map(opt => (
-          <Option key={opt.title+ ':'} value={opt.title}>
-            {opt.title + ':'}
+          <Option key={opt ? opt.title : '' + ':'} value={opt ? opt.title : '' }>
+            {opt ? opt.title : ''  + ':'}
           </Option>
         ))}
       </OptGroup>

@@ -1,7 +1,5 @@
 
-import { CHECKSOURCE, ALLSOURCES, REMOVESOURCE, UPDATESOURCES, ADDSOURCE,
-         ALLTAGS, ADDTAG, UPDATETAG
-} from '../constants/admin';
+import { CHECKSOURCE, ALLSOURCES, ALLTAGS } from '../constants/admin';
 
 const initialState = {
   currentSourceData:'',

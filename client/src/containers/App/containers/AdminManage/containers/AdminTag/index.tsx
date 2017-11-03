@@ -18,7 +18,7 @@ class EditableCell extends React.Component {
     id: this.props.id,
     editable: false,
   }
-  handleChange = (e) => {
+  handleChange = (e: any) => {
     const value = e.target.value;
     const key = e.target.key;
     this.setState({ value,key });
@@ -174,6 +174,5 @@ const mapStateToProps = (state: any) => ({
   allTags: state.admin.allTags
 })
 
-AdminTag = connect(mapStateToProps)(AdminTag);
 
-export default AdminTag;
+export default connect(mapStateToProps)(AdminTag);

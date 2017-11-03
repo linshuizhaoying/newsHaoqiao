@@ -84,6 +84,4 @@ const mapStateToProps = (state: any) => ({
   userName: state.user.userName,
 })
 
-Home = connect(mapStateToProps)(Home);
-
-export default Home;
+export default connect(mapStateToProps)(Home);

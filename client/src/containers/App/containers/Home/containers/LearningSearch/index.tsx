@@ -457,6 +457,6 @@ const mapStateToProps = (state: any) => ({
   tagList: state.info.tagList
 })
 
-LearningSearch = connect(mapStateToProps)(LearningSearch)
 
-export default LearningSearch
+
+export default connect(mapStateToProps)(LearningSearch)

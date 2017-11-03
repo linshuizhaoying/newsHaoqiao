@@ -179,6 +179,4 @@ const mapStateToProps = (state: any) => ({
   newsList: state.info.newsList
 })
 
-DailyNews = connect(mapStateToProps)(DailyNews);
-
-export default DailyNews;
+export default connect(mapStateToProps)(DailyNews);
