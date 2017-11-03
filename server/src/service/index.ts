@@ -1,6 +1,6 @@
 export * from './userApi'
 export * from './adminApi'
-export * from './sourceApi'
+export * from './SourceApi'
 export * from './tagApi'
 export * from './spider'
 export * from './newsApi'
