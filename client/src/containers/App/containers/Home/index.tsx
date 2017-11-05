@@ -59,7 +59,6 @@ export class Home extends React.Component<any, any> {
   render () {
     return(
       <div id="Home">
-        <h1>888</h1>
         {/* <button onClick={this.getUserInfo}> 获取用户信息 </button> */}
         <Tabs tabPosition='left' onTabClick={this.handleTab} >
           <TabPane tab="今日资讯" key="1" >
