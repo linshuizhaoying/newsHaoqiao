@@ -2,9 +2,15 @@ import * as React from 'react';
 import NewsItem from '../NesItem/index';
 import { Table } from 'antd';
 import { TableColumnConfig } from 'antd/lib/table/Table';
+import { PaginationProps } from 'antd/lib/pagination';
 import './index.less';
 
-// Define a  generic Table 
+const pagination:PaginationProps = {
+  total: 999,
+  pageSize: 88,
+  showSizeChanger: true,
+  pageSizeOptions: ['20', '40', '88', '100'],
+};
 class MyTable extends Table<any>{}
 
 const columns:TableColumnConfig<any>[] = [{
@@ -12,6 +18,8 @@ const columns:TableColumnConfig<any>[] = [{
   dataIndex: 'item',
   key: 'item',
 }]
+
+
 
 export class NewsList extends React.Component<any, any> {
   constructor (props: any) {
@@ -39,6 +47,7 @@ export class NewsList extends React.Component<any, any> {
           tagList={this.props.tagList} key={key} data={item} index={key + 1}></NewsItem>
          })
       })
+      pagination.total = nextProps.data.length
       this.setState({
         dataSource: arr
       })
@@ -61,7 +70,7 @@ export class NewsList extends React.Component<any, any> {
         {/* <Table pagination={{ pageSize: 88 }} scroll={{ y: 480 }} columns={columns} dataSource={this.state.dataSource} bordered size="middle"/> */}
 
 
-        <MyTable dataSource={this.state.dataSource} columns={columns} scroll={{ y: 480 }} bordered size='middle'>
+        <MyTable pagination={ pagination } dataSource={this.state.dataSource} columns={columns} scroll={{ y: 480 }} bordered size='middle'>
         </MyTable>
       </div>
     )
