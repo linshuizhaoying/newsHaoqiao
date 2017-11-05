@@ -102,7 +102,19 @@ export class Header extends React.Component<any, any> {
             </div>
         }
         
-
+        {
+            this.props.userName === 'admin'?
+              <Link to={{
+                    pathname: '/xyt',
+                    state: {}
+                  }}>
+                <Button type="primary">
+                  <Icon type="login" />
+                  admin
+                </Button>
+              </Link>
+              : ''
+          }
 
         </div>
         
