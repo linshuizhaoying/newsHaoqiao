@@ -13,6 +13,7 @@ const axios_1 = require("axios");
 const index_1 = require("../../db/controllers/index");
 const news_1 = require("../../db/controllers/news");
 const tag_1 = require("../../db/controllers/tag");
+const _ = require("lodash");
 const cheerio = require('cheerio');
 const translate = (str) => __awaiter(this, void 0, void 0, function* () {
     let data = '';
@@ -77,6 +78,9 @@ exports.spiderInitial = () => __awaiter(this, void 0, void 0, function* () {
         });
     }));
 });
+function compare(a, b) {
+    return a.title === b.title;
+}
 const insertTodayNews = (array) => __awaiter(this, void 0, void 0, function* () {
     const temp = {
         title: '',
@@ -89,14 +93,39 @@ const insertTodayNews = (array) => __awaiter(this, void 0, void 0, function* () 
         read: 0,
         score: 0,
     };
-    array.forEach((arr) => __awaiter(this, void 0, void 0, function* () {
-        arr.forEach((item) => __awaiter(this, void 0, void 0, function* () {
-            const result = Object.assign(temp, item);
-            //  console.log('正在插入:')
-            //  console.log(result)
-            yield news_1.saveToNews(result);
-        }));
+    const existNews = yield news_1.ExistNews();
+    const flattenArr = yield _.flattenDeep(array);
+    console.log(existNews.length);
+    console.log(flattenArr.length);
+    const result = _.differenceWith(flattenArr, existNews, compare);
+    console.log(result);
+    result.forEach((item) => __awaiter(this, void 0, void 0, function* () {
+        const ok = Object.assign(temp, item);
+        console.log('正在插入:');
+        console.log(ok);
+        yield news_1.saveToNews(ok);
     }));
+    // array.forEach( async (arr: any[]) => {
+    //   arr.forEach( async (item: any) => {
+    //     // let flag = true
+    //     // existNews.forEach(async (oldItem: any) => {
+    //     //    if (oldItem.title.trim() == item.title.trim()) {
+    //     //      flag = false
+    //     //      console.log('咨询已存在')
+    //     //    }
+    //     // });
+    //     // if ( !flag ) {
+    //     //   console.log('新资讯:')
+    //     //   console.log(item)
+    //     // } else {
+    //     //   console.log('-1')
+    //     // }
+    //     //  const result = Object.assign(temp, item)
+    //     //  console.log('正在插入:')
+    //     //  console.log(result)
+    //     //  await saveToNews(result)
+    //   })
+    // })
 });
 const spiderSingleUrl = (item, index) => __awaiter(this, void 0, void 0, function* () {
     console.log('正在处理:', item);

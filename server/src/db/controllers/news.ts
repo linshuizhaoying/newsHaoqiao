@@ -20,6 +20,15 @@ function GetDateStr(AddDayCount: any) {
   const d = dd.getDate()
   return y + '-' + m + '-' + d
 }
+
+export const ExistNews  = async() => {
+  const start = new Date(GetDateStr(-7)) // 过去 七天
+  const end = new Date(GetDateStr(1)) // 明天 0点
+  console.log(start)
+  console.log(end)
+  return await News.find({'CreateDate': {'$gte': start, '$lt': end}}).sort({CreateDate: -1})
+}
+
 export const HoursNews = async() => {
    const start = new Date(GetDateStr(0)) // 今天 0点
    const end = new Date(GetDateStr(1)) // 明天 0点

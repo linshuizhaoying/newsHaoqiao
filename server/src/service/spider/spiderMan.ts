@@ -1,8 +1,9 @@
 import * as tjs from 'translation.js';
 import axios from 'axios';
 import { AllSources } from '../../db/controllers/index';
-import { saveToNews } from '../../db/controllers/news';
+import { saveToNews, ExistNews } from '../../db/controllers/news';
 import { AllTags } from '../../db/controllers/tag';
+import * as _ from 'lodash';
 const cheerio = require('cheerio');
 const translate = async (str: string) => {
   let data = ''
@@ -83,6 +84,11 @@ export const spiderInitial = async() => {
   });
 }
 
+function compare ( a: any, b: any ) {
+  return a.title === b.title
+}
+
+
 const insertTodayNews = async(array: any[]) => {
   const temp = {
     title: '',
@@ -95,14 +101,40 @@ const insertTodayNews = async(array: any[]) => {
     read: 0,
     score: 0,
   }
-  array.forEach( async (arr: any[]) => {
-    arr.forEach( async (item: any) => {
-       const result = Object.assign(temp, item)
-      //  console.log('正在插入:')
-      //  console.log(result)
-       await saveToNews(result)
-    })
+  const existNews = await ExistNews()
+  const flattenArr = await _.flattenDeep(array)
+  console.log(existNews.length)
+  console.log(flattenArr.length)
+  const result = _.differenceWith( flattenArr, existNews, compare)
+  console.log(result)
+  result.forEach( async (item: any) => {
+     const ok = Object.assign(temp, item)
+     console.log('正在插入:')
+     console.log(ok)
+     await saveToNews(ok)
   })
+  // array.forEach( async (arr: any[]) => {
+  //   arr.forEach( async (item: any) => {
+  //     // let flag = true
+  //     // existNews.forEach(async (oldItem: any) => {
+  //     //    if (oldItem.title.trim() == item.title.trim()) {
+  //     //      flag = false
+  //     //      console.log('咨询已存在')
+  //     //    }
+  //     // });
+  //     // if ( !flag ) {
+  //     //   console.log('新资讯:')
+  //     //   console.log(item)
+  //     // } else {
+  //     //   console.log('-1')
+  //     // }
+
+  //     //  const result = Object.assign(temp, item)
+  //     //  console.log('正在插入:')
+  //     //  console.log(result)
+  //     //  await saveToNews(result)
+  //   })
+  // })
 }
 
 const spiderSingleUrl = async(item: SourceData, index: any) => {

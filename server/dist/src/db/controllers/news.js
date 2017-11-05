@@ -17,6 +17,13 @@ function GetDateStr(AddDayCount) {
     const d = dd.getDate();
     return y + '-' + m + '-' + d;
 }
+exports.ExistNews = () => __awaiter(this, void 0, void 0, function* () {
+    const start = new Date(GetDateStr(-7)); // 过去 七天
+    const end = new Date(GetDateStr(1)); // 明天 0点
+    console.log(start);
+    console.log(end);
+    return yield News.find({ 'CreateDate': { '$gte': start, '$lt': end } }).sort({ CreateDate: -1 });
+});
 exports.HoursNews = () => __awaiter(this, void 0, void 0, function* () {
     const start = new Date(GetDateStr(0)); // 今天 0点
     const end = new Date(GetDateStr(1)); // 明天 0点
