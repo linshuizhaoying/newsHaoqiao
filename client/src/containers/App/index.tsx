@@ -87,7 +87,6 @@ export class App extends React.Component<any, any> {
   render() {
     return (
       <div className="App">
-        <h1>test</h1>
         <Header isLogin={this.props.isLogin} userName={this.props.userName} logOut={this.logOut} tabChange={this.tabHandle}></Header>
         <div className="App-content">
           <Switch>
