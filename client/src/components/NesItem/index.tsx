@@ -125,7 +125,7 @@ export class NewsItem extends React.Component<any, any> {
              <a target="_blank"
              data-en={this.props.data.enTitle}
              className={ `${this.props.data.enTitle ? 'enTitle' : ''}`}
-             href={(this.props.data.url.includes('http') ? this.props.data.url : this.props.data.sourceLink + this.props.data.url)}>{this.props.data.title}</a>
+             href={(this.props.data.url && this.props.data.url.includes('http') ? this.props.data.url : this.props.data.sourceLink + this.props.data.url)}>{this.props.data.title}</a>
           </div>
           <div className="source">
              (<a  target="_blank" href={this.props.data.sourceLink}>{this.props.data.sourceTitle}</a>)
