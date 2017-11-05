@@ -37,7 +37,7 @@ console.log('server start 999:')
 console.log('服务正在监听端口:' + port)
 app.listen(port, () => {
   console.log(('  App is running at http://localhost:%d in %s mode'), port, process.env.NODE_ENV);
-  // spiderInitial()
+  spiderInitial()
 
   console.log('  Press CTRL-C to stop\n');
 });
