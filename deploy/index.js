@@ -1,4 +1,5 @@
 var spawn = require('child_process').spawn
+var spawn = require('child_process').spawn
 var http = require('http')
 var spawn = require('child_process').spawn
 var createHandler = require('github-Webhooks-handler')
@@ -30,11 +31,15 @@ function rumCommand( cmd, args, cwd, callback ) {
 }
 
 function init() {
-  rumCommand('sh', ['../server/autoServer.sh'], '../server' ,function( result ) { // 执行 脚本文件
+  rumCommand('sh', ['../clean.sh'], './' ,function( result ) { // 清理缓存
+    console.log(result)
+  })
+
+  rumCommand('sh', ['../server/autoServer.sh'], '../server' ,function( result ) { // cLient端更新
     console.log(result)
   })
   
-  rumCommand('sh', ['../client/autoClient.sh'], '../client' ,function( result ) { // 执行 脚本文件
+  rumCommand('sh', ['../client/autoClient.sh'], '../client' ,function( result ) { // server端更新
     console.log(result)
   })
 
