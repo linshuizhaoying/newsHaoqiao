@@ -1,4 +1,4 @@
 #! /bin/bash
 cd ./
-echo 'server build'
-yarn run start
+echo 'server start'
+yarn run watch

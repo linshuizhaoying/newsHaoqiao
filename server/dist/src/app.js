@@ -28,7 +28,7 @@ mongoose.connect(config_1.config.mongo.url, { useMongoClient: true }).catch((err
 app.use(bodyParser());
 routes_1.Router(app);
 const port = config_1.config.app.port;
-console.log('server start 666:');
+console.log('server start 999:');
 console.log('服务正在监听端口:' + port);
 app.listen(port, () => {
     console.log(('  App is running at http://localhost:%d in %s mode'), port, process.env.NODE_ENV);
