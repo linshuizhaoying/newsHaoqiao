@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Icon, Button, Menu } from 'antd'
+import Icon from 'antd/lib/icon'
+import Button from 'antd/lib/button'
+import Menu  from 'antd/lib/menu'
 import { Link } from 'react-router-dom';
 import './index.less';
 
@@ -81,6 +83,7 @@ export class Header extends React.Component<any, any> {
               </div>
                 : ''
           }
+        
           { this.props.isLogin === false ?
             <div className="operateBtn">
 
@@ -113,12 +116,9 @@ export class Header extends React.Component<any, any> {
               </Button>
             </div>
         }
-        
+        </div>
 
         </div>
-        
-
-      </div>
     )
   }
 }

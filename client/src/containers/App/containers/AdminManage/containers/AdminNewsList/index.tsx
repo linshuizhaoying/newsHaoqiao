@@ -1,7 +1,9 @@
 import * as React from 'react';
 import NotificationUtils from '../../../../../../util/notification';
 import { checkLocalSource, removeSourceRemote } from '../../../../../../actions/admin';
-import { Button, Popconfirm, Table } from 'antd';
+import  Table  from 'antd/lib/table';
+import  Button  from 'antd/lib/button';
+import  Popconfirm  from 'antd/lib/popconfirm';
 import { connect } from 'react-redux';
 import './index.less';
 

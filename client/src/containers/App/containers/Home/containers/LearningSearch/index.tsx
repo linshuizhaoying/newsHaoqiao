@@ -1,12 +1,6 @@
 import * as React from 'react';
 import Loader from '../../../../../../components/Loader/index';
 import NewsList from '../../../../../../components/NewsList/index';
-import {
-  // AutoComplete,
-  // Button,
-  // Icon,
-  // Input
-  } from 'antd';
 import { connect } from 'react-redux';
 import './index.less';
 

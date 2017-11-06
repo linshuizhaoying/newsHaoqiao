@@ -1,13 +1,10 @@
 import * as React from 'react';
 import NotificationUtils from '../../util/notification';
 import Validator from '../../util/validator'
-
-import {
-  Form,
-  Button,
-  Modal,
-  Input
-  } from 'antd';
+import  Form  from 'antd/lib/form';
+import  Button  from 'antd/lib/button';
+import  Modal  from 'antd/lib/modal';
+import  Input  from 'antd/lib/input';
 import './index.less';
 const { TextArea } = Input;
 const FormItem = Form.Item

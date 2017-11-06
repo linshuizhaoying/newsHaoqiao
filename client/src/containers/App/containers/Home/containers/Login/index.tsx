@@ -1,12 +1,10 @@
 import * as React from 'react';
 import NotificationUtils from '../../../../../../util/notification';
 import Validator from '../../../../../../util/validator';
-import {
-  Button,
-  Form,
-  Icon,
-  Input
-  } from 'antd';
+import  Button  from 'antd/lib/button';
+import  Form  from 'antd/lib/form';
+import  Icon  from 'antd/lib/icon';
+import  Input  from 'antd/lib/input';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LoginInRemote } from '../../../../../../actions';

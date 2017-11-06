@@ -1,4 +1,4 @@
-import { notification } from 'antd';
+import notification  from 'antd/lib/notification';
 
 export default class NotificationUtils {
   static notificationError = (message: any, description: any, duration:any) => {

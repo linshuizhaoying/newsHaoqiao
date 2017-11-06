@@ -1,6 +1,6 @@
 import * as React from 'react';
 import NewsItem from '../NesItem/index';
-import { Table } from 'antd';
+import  Table  from 'antd/lib/table';
 import { TableColumnConfig } from 'antd/lib/table/Table';
 import { PaginationProps } from 'antd/lib/pagination';
 import './index.less';

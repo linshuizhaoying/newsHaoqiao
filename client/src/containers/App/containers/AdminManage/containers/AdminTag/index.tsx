@@ -1,13 +1,12 @@
 import * as React from 'react';
 import NotificationUtils from '../../../../../../util/notification';
 import { addTagRemote, updateTagRemote, allTagRemote } from '../../../../../../actions/admin';
-import {
-  Button,
-  Icon,
-  Input,
-  Popconfirm,
-  Table
-  } from 'antd';
+
+import  Button  from 'antd/lib/button';
+import  Icon  from 'antd/lib/icon';
+import  Input  from 'antd/lib/input';
+import  Popconfirm  from 'antd/lib/popconfirm';
+import  Table  from 'antd/lib/table';
 import { connect } from 'react-redux';
 import './index.less';
 

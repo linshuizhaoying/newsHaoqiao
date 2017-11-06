@@ -4,7 +4,7 @@ import DailyNews from './containers/DailyNews/index';
 import Guidance from './containers/Guidance/index';
 import Weekly from './containers/Weekly/index';
 import { connect } from 'react-redux';
-import { Tabs } from 'antd';
+import  Tabs  from 'antd/lib/tabs';
 import { UserInfoRemote } from '../../../../actions/user';
 import './index.less';
 

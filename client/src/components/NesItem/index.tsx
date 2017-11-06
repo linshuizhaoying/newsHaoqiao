@@ -2,11 +2,8 @@ import * as React from 'react';
 import NotificationUtils from '../../util/notification';
 import _ from 'lodash'
 import TimeAgo from 'timeago-react';
-import {
-  Badge,
-  Icon,
-  // Menu
-  } from 'antd';
+import  Icon  from 'antd/lib/icon'
+import  Badge  from 'antd/lib/badge'
 import './index.less';
 // const SubMenu = Menu.SubMenu;
 export class NewsItem extends React.Component<any, any> {

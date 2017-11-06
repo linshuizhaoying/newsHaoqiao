@@ -1,11 +1,9 @@
 import * as React from 'react';
 import axios from 'axios';
-import {
-  Button,
-  Icon,
-  Input,
-  Select
-  } from 'antd';
+import  Button  from 'antd/lib/button';
+import  Icon  from 'antd/lib/icon';
+import  Input  from 'antd/lib/input';
+import  Select  from 'antd/lib/select';
 import { UrlRegEx } from '../../../../../../util/tools';
 import { connect } from 'react-redux';
 import './index.less';

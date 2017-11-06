@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
 
-import { Form, Icon, Input, Button } from 'antd'
-
+import  Button  from 'antd/lib/button';
+import  Form  from 'antd/lib/form';
+import  Icon  from 'antd/lib/icon';
+import  Input  from 'antd/lib/input';
 import { Link } from 'react-router-dom'
 
 import NotificationUtils from '../../../../../../util/notification';

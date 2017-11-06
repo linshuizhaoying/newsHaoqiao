@@ -4,12 +4,10 @@ import NewTag from '../../../../../../components/NewTag/index';
 import Loader from '../../../../../../components/Loader/index';
 import { connect } from 'react-redux';
 import { newsListRemote, WeeksNewsListRemote, MouthsNewsListRemote } from '../../../../../../actions';
-import {
-  Dropdown,
-  Icon,
-  Menu,
-  Switch
-  } from 'antd';
+import  Menu  from 'antd/lib/menu';
+import  Dropdown  from 'antd/lib/dropdown';
+import  Icon  from 'antd/lib/icon';
+import  Switch  from 'antd/lib/switch';
 import './index.less';
 
 export class DailyNews extends React.Component<any, any> {

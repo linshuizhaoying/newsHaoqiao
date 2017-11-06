@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './index.less';
-import { Table, Button } from 'antd';
+import  Button  from 'antd/lib/button';
+import  Table  from 'antd/lib/table';
 import { connect } from 'react-redux';
 import NotificationUtils from '../../../../../../util/notification';
 import { checkLocalSource } from '../../../../../../actions/admin';
