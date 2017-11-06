@@ -36,7 +36,7 @@ console.log(rule)
 
 schedule.scheduleJob(rule, function() {
   spiderInitial();
-  console.log('任务正在执行中...' + 'hour' + rule.hour);
+  console.log('任务正在执行中...' + 'hour');
 });
 
 interface SourceData {
