@@ -101,6 +101,7 @@ export class DailyNews extends React.Component<any, any> {
         }, () => {
           const { dispatch } = this.props;
           dispatch(newsListRemote())
+          this.setState({loading:true})
         })
       case '2':
         return this.setState({
@@ -108,6 +109,7 @@ export class DailyNews extends React.Component<any, any> {
         }, () => {
           const { dispatch } = this.props;
           dispatch(WeeksNewsListRemote())
+          this.setState({loading:true})
         })
       case '3':
         return this.setState({
@@ -115,6 +117,7 @@ export class DailyNews extends React.Component<any, any> {
         }, () => {
           const { dispatch } = this.props;
           dispatch(MouthsNewsListRemote())
+          this.setState({loading:true})
         })
       default:
       return

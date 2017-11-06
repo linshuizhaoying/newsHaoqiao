@@ -69,6 +69,18 @@ export class Header extends React.Component<any, any> {
           </Menu>
         </div>
         <div id="UserOperate">
+          {
+              this.props.userName === 'admin'?
+              <div className="operateBtn">
+                <Link to={{
+                      pathname: '/xyt',
+                      state: {}
+                    }}>
+                  登录后台
+                </Link>
+              </div>
+                : ''
+          }
           { this.props.isLogin === false ?
             <div className="operateBtn">
 
@@ -102,19 +114,6 @@ export class Header extends React.Component<any, any> {
             </div>
         }
         
-        {
-            this.props.userName === 'admin'?
-              <Link to={{
-                    pathname: '/xyt',
-                    state: {}
-                  }}>
-                <Button type="primary">
-                  <Icon type="login" />
-                  admin
-                </Button>
-              </Link>
-              : ''
-          }
 
         </div>
         

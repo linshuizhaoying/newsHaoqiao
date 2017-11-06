@@ -35,9 +35,8 @@ export class NewsList extends React.Component<any, any> {
   }
 
   componentWillReceiveProps(nextProps: any) {
-    // console.log(nextProps.data )
-    if(nextProps.data && nextProps.data.length > 0){
-      // console.log('received')
+    console.log(nextProps )
+    if(nextProps.data && nextProps.data.length >= 0){
       let arr: any[] = []
       nextProps.data.map((item: any, key: any) =>{
          arr.push({
