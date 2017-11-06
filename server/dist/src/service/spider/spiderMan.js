@@ -13,6 +13,7 @@ const axios_1 = require("axios");
 const index_1 = require("../../db/controllers/index");
 const news_1 = require("../../db/controllers/news");
 const tag_1 = require("../../db/controllers/tag");
+const schedule = require("node-schedule");
 const _ = require("lodash");
 const cheerio = require('cheerio');
 const translate = (str) => __awaiter(this, void 0, void 0, function* () {
@@ -29,10 +30,20 @@ const translate = (str) => __awaiter(this, void 0, void 0, function* () {
     return data;
 });
 const config = {
-    interval: 120,
+    interval: 60,
     use_redis: false,
     error_try: true,
 };
+// 设置定时爬取任务
+const rule = new schedule.RecurrenceRule();
+rule.dayOfWeek = [0, 1, 2, 3, 4, 5, 6, 7];
+rule.hour = Array.from(new Set(Array.from(new Array(Math.ceil(24 / (config.interval / 60))), (val, index) => Math.ceil(index * config.interval / 60) % 24)));
+rule.minute = 10;
+console.log(rule);
+schedule.scheduleJob(rule, function () {
+    exports.spiderInitial();
+    console.log('任务正在执行中...' + 'hour' + rule.hour);
+});
 let dataQueueList = []; // 从数据库中获取咨询源加入队列
 let tagList = []; // 从数据库中获取标签列表
 const errorQueueList = []; // 爬取失败的咨询源队列

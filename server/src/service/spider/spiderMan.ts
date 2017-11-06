@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AllSources } from '../../db/controllers/index';
 import { saveToNews, ExistNews } from '../../db/controllers/news';
 import { AllTags } from '../../db/controllers/tag';
+import * as schedule from 'node-schedule'
 import * as _ from 'lodash';
 const cheerio = require('cheerio');
 const translate = async (str: string) => {
@@ -20,10 +21,24 @@ const translate = async (str: string) => {
   return data
 }
 const config = {
-  interval: 120, // 抓取间隔 分钟
+  interval: 60, // 抓取间隔 分钟
   use_redis: false, // 是否存入redis数据库，暂时不
   error_try: true, // 出错后是否加入队列再次尝试
 }
+
+// 设置定时爬取任务
+const rule = new schedule.RecurrenceRule();
+rule.dayOfWeek = [0, 1, 2, 3, 4, 5, 6, 7];
+rule.hour = Array.from(new Set(Array.from(new Array( Math.ceil(24 / (config.interval / 60))), (val, index) => Math.ceil(index * config.interval / 60) % 24)))
+rule.minute = 30;
+
+console.log(rule)
+
+schedule.scheduleJob(rule, function() {
+  spiderInitial();
+  console.log('任务正在执行中...' + 'hour' + rule.hour);
+});
+
 interface SourceData {
   sourceTitle: string,
   url: string,
