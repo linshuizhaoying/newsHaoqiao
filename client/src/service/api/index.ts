@@ -1,6 +1,6 @@
 // 定义测试接口地址
-// const baseUrl = "http://new.haoqiao.me:8866"
- const baseUrl = "http://localhost:8866"
+ const baseUrl = "http://new.haoqiao.me:8866"
+// const baseUrl = "http://localhost:8866"
 // 用户操作
 export const REG_API = baseUrl + '/api/reg';
 export const LOGIN_API = baseUrl +  '/api/login';
