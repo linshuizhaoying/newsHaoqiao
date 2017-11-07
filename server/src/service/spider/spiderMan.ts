@@ -21,7 +21,7 @@ const translate = async (str: string) => {
   return data
 }
 const config = {
-  interval: 60, // 抓取间隔 分钟
+  interval: 120, // 抓取间隔 分钟
   use_redis: false, // 是否存入redis数据库，暂时不
   error_try: true, // 出错后是否加入队列再次尝试
 }
