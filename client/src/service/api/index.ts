@@ -1,5 +1,5 @@
 // 定义接口地址
- const baseUrl = "https://new.haoqiao.me:8877"
+ const baseUrl = "http://new.haoqiao.me:8866"
 // const baseUrl = "http://localhost:8866"
 // 用户操作
 export const REG_API = baseUrl + '/api/reg';

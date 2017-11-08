@@ -3,7 +3,7 @@ import * as Cors from 'koa-cors'
 import * as Logger from 'koa-logger'
 import * as bodyParser from 'koa-bodyparser'
 // https 操作
-import * as http2 from 'http2';
+// import * as http2 from 'http2';
 import * as fs from 'fs';
 import { Router } from './routes'
 
@@ -47,10 +47,10 @@ app.listen(port, () => {
 
 // http2 操作
 
-const options: any = {
-  key: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/localhost.key'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/localhost.crt')
-};
-http2.createServer(options, function(request: any , response: any) {
-  response.end('http2 start!');
-}).listen(8877);
+// const options: any = {
+//   key: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/localhost.key'),
+//   cert: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/localhost.crt')
+// };
+// http2.createServer(options, function(request: any , response: any) {
+//   response.end('http2 start!');
+// }).listen(8877);
