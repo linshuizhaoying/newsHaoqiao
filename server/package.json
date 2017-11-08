@@ -26,6 +26,7 @@
     "cheerio": "^1.0.0-rc.2",
     "concurrently": "^3.5.0",
     "eslint": "^4.6.1",
+    "http2": "^3.3.7",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-cors": "^0.0.16",
