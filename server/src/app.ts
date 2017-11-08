@@ -51,6 +51,6 @@ const options: any = {
   key: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/localhost.key'),
   cert: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/localhost.crt')
 };
-http2.createServer(options, function(request:any , response: any) {
+http2.createServer(options, function(request: any , response: any) {
   response.end('http2 start!');
 }).listen(8877);
