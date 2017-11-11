@@ -30,7 +30,7 @@ const translate = (str) => __awaiter(this, void 0, void 0, function* () {
     return data;
 });
 const config = {
-    interval: 60,
+    interval: 120,
     use_redis: false,
     error_try: true,
 };
@@ -38,11 +38,11 @@ const config = {
 const rule = new schedule.RecurrenceRule();
 rule.dayOfWeek = [0, 1, 2, 3, 4, 5, 6, 7];
 rule.hour = Array.from(new Set(Array.from(new Array(Math.ceil(24 / (config.interval / 60))), (val, index) => Math.ceil(index * config.interval / 60) % 24)));
-rule.minute = 10;
+rule.minute = 30;
 console.log(rule);
 schedule.scheduleJob(rule, function () {
     exports.spiderInitial();
-    console.log('任务正在执行中...' + 'hour' + rule.hour);
+    console.log('任务正在执行中...' + 'hour');
 });
 let dataQueueList = []; // 从数据库中获取咨询源加入队列
 let tagList = []; // 从数据库中获取标签列表

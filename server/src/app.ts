@@ -48,7 +48,7 @@ app.listen(port, () => {
 // 开启https
 
 const options: any = {
-  key: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/privkey.key'),
+  key: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/fullchain.pem')
 };
 try {

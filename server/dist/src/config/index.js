@@ -4,6 +4,7 @@ exports.config = {
     "app": {
         "root": "/",
         "port": 8866,
+        "httpsPort": 8877,
         "env": "development",
         "keys": "haoqiaoSecret",
         "baseApi": '/api'
