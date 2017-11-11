@@ -59,7 +59,7 @@ try {
         console.error('HTTPS server FAIL: ', err, (err && err.stack));
       }
       else {
-        console.log(('  App is running at http://localhost:%d in %s mode'), config.app.httpsPort, process.env.NODE_ENV);
+        console.log(('  App is running at https://localhost:%d in %s mode'), config.app.httpsPort, process.env.NODE_ENV);
       }
     });
 }
