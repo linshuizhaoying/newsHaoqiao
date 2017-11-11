@@ -3,7 +3,7 @@ import * as Cors from 'koa-cors'
 import * as Logger from 'koa-logger'
 import * as bodyParser from 'koa-bodyparser'
 // https 操作
-// import * as http2 from 'http2';
+import * as https from 'https';
 import * as fs from 'fs';
 import { Router } from './routes'
 
@@ -45,12 +45,24 @@ app.listen(port, () => {
   console.log('  Press CTRL-C to stop\n');
 });
 
-// http2 操作
+// 开启https
 
-// const options: any = {
-//   key: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/localhost.key'),
-//   cert: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/localhost.crt')
-// };
-// http2.createServer(options, function(request: any , response: any) {
-//   response.end('http2 start!');
-// }).listen(8877);
+const options: any = {
+  key: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/privkey.key'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/news.haoqiao.me/fullchain.pem')
+};
+try {
+  const httpsServer = https.createServer(options, app.callback());
+  httpsServer
+    .listen( config.app.httpsPort, function(err: any) {
+      if (!!err) {
+        console.error('HTTPS server FAIL: ', err, (err && err.stack));
+      }
+      else {
+        console.log(('  App is running at http://localhost:%d in %s mode'), config.app.httpsPort, process.env.NODE_ENV);
+      }
+    });
+}
+catch (ex) {
+  console.error('Failed to start HTTPS server\n', ex, (ex && ex.stack));
+}
